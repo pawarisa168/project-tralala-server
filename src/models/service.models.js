@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const serviceSchema = new mongoose.schema(
+
   {
     name: { type: String, required: true },
     description: { type: String },
@@ -14,3 +15,5 @@ const serviceSchema = new mongoose.schema(
     timestamps: true,
   }
 );
+
+export default service = mongoose.model("service", serviceSchema);
