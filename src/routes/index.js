@@ -2,9 +2,8 @@ import { Router } from "express";
 
 export const router = Router();
 
-router.get("/", home);
-router.get("about", about);
-router.get("serviceslist", serviceslist);
-router.get("productlist", productlist);
-router.get("contact", contact);
-router.get("/login", usersLogin);
+router.get("/", getHome);
+router.get("/about", getAbout);
+router.get("/services-list", getServicesList);
+router.get("/product-list", getProductList);
+router.get("/contact", getContact);

@@ -1,8 +1,9 @@
 import express from "express";
 import cors from "cors";
-import dotev from "dotenv";
+import dotenv from "dotenv";
+import { router as apiRouters } from "./routes/index.js";
 
-dotev.config();
+dotenv.config();
 
 export const app = express();
 
@@ -13,6 +14,8 @@ const corsOption = {
 app.use(cors(corsOption));
 
 app.use(express.json);
+
+app.use("/api", apiRouters);
 
 app.get("/", (req, res) => {
   res.send(`Server is running (●'◡'●)`);
