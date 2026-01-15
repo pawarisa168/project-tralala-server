@@ -1,11 +1,13 @@
 import Router from "express";
-import { register, login } from "../modules/auth/auth.controller.js";
+import { register, login } from "../controller/auth/auth.controller.js";
 import { registerSchema } from "../models/auth.models.js";
-import { validate } from "../modules/auth/aith.validation.js";
+import { validate } from "../controller/auth/aith.validation.js";
 
-export const router = Router();
+const authRouter = Router();
 
 //ENDPOINT http://localhost:3000/auth/register
-router.post("/register", validate(registerSchema), register);
+authRouter.post("/register", validate(registerSchema), register);
 
-router.post("/login", login);
+authRouter.post("/login", login);
+
+export default authRouter;

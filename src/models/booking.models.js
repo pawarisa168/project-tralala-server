@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
-const serviceSchema = new mongoose.schema(
-
+const bookingSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     description: { type: String },
@@ -16,4 +15,6 @@ const serviceSchema = new mongoose.schema(
   }
 );
 
-export default service = mongoose.model("service", serviceSchema);
+const booking = mongoose.model("booking", bookingSchema);
+
+export default booking;
