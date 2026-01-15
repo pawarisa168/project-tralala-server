@@ -1,4 +1,3 @@
-import packages from "../models/services.models.js";
 
 export const getServices = (req, res) => {
   try {

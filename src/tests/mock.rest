@@ -1,0 +1,7 @@
+###
+GET  http://localhost:3000/api/mock/services
+Content-Type: application/json
+
+###
+POST http://localhost:3000/api/mock/creteServices
+Content-Type:  application/json

@@ -1,2 +1,0 @@
- ### GET request to crate new booking
-GET  http://localhost:3000/booking/booking-list

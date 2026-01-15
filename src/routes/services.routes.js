@@ -3,7 +3,7 @@ import { getServices, getServicesId } from "../controller/services.controller.js
 
 const serviceRouter = Router();
 
-serviceRouter.use("/services", getServices);
-serviceRouter.use("/services/:id", getServicesId);
+serviceRouter.get("/services", getServices);
+serviceRouter.get("/services/:id", getServicesId);
 
 export default serviceRouter;
