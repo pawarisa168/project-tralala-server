@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
-import { router as authRouter } from "./routes/auth.routes.js";
+import { router as apiRouter } from "./routes/index.js";
 
 const app = express();
 
@@ -11,7 +11,7 @@ app.use(morgan("dev")); //show log
 app.use(express.json()); // read JSON
 
 //Routing
-app.use("/auth", authRouter);
+app.use("/api", apiRouter);
 
 //Error handling
 app.use((err, req, res, next) => {
