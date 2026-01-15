@@ -19,7 +19,7 @@ app.use(cors(corsOption)); // ประตูรักษาความปล�
 app.use(express.json());
 
 // API Routes
-app.use("/api/serivces", bookingRouter);
+app.use("/booking", bookingRouter);
 app.use("/api/login", authRouter);
 
 // app เปิดประตูรอรับจาก Frontend เพื่อส่ง Response กลับไปถ้ามีการเรียก (GET)

@@ -30,7 +30,7 @@ export const getAbout = (req, res) => {
   }
 };
 
-export const getServicesList = (req, res) => {
+export const getBookingList = (req, res) => {
   try {
     res.status(200).json({
       success: true,
