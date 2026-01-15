@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import "dotenv/config.js";
-import bookingRouter from "./routes/booking.routes.js";
+import servicesRouter from "./routes/services.routes.js";
 import authRouter from "./routes/auth.routes.js"
 
 // เรียกใช้ Express ให้เป็นค่า app
@@ -19,7 +19,7 @@ app.use(cors(corsOption)); // ประตูรักษาความปล�
 app.use(express.json());
 
 // API Routes
-app.use("/booking", bookingRouter);
+app.use("/api/service", servicesRouter);
 app.use("/api/login", authRouter);
 
 // app เปิดประตูรอรับจาก Frontend เพื่อส่ง Response กลับไปถ้ามีการเรียก (GET)

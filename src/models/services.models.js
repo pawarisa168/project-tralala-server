@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const bookingSchema = new mongoose.Schema(
+const servicesSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     description: { type: String },
@@ -10,11 +10,8 @@ const bookingSchema = new mongoose.Schema(
     isActive: { type: Boolean },
     durationDay: { type: Number },
   },
-  {
-    timestamps: true,
-  }
 );
 
-const booking = mongoose.model("booking", bookingSchema);
+const services = mongoose.model("packages", servicesSchema);
 
-export default booking;
+export default services;
