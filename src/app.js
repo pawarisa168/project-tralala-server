@@ -3,7 +3,8 @@ import cors from "cors";
 import morgan from "morgan";
 import "dotenv/config.js";
 import servicesRouter from "./routes/services.routes.js";
-import authRouter from "./routes/auth.routes.js"
+import authRouter from "./routes/auth.routes.js";
+import customersRouter from "./routes/customers.routes.js";
 
 // เรียกใช้ Express ให้เป็นค่า app
 export const app = express(); // Node.js
@@ -19,8 +20,9 @@ app.use(cors(corsOption)); // ประตูรักษาความปล�
 app.use(express.json());
 
 // API Routes
-app.use("/api/service", servicesRouter);
+app.use("/api/services", servicesRouter);
 app.use("/api/login", authRouter);
+app.use("/api/customers", customersRouter);
 
 // app เปิดประตูรอรับจาก Frontend เพื่อส่ง Response กลับไปถ้ามีการเรียก (GET)
 app.get("/", (req, res) => {

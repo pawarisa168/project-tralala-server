@@ -1,8 +1,9 @@
 import { Router } from "express";
-import { getServices } from "../controller/services.controller.js";
+import { getServices, getServicesId } from "../controller/services.controller.js";
 
 const serviceRouter = Router();
 
-serviceRouter.use("/packages-list", getServices);
+serviceRouter.use("/services", getServices);
+serviceRouter.use("/services/:id", getServicesId);
 
 export default serviceRouter;
