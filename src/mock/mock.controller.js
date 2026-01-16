@@ -34,7 +34,7 @@ export const createMockData = async (req, res) => {
       data: newService, // ถ้าสร้างสำเร็จ จะแสดงเป็น 201 บอกว่าได้แล้ว
     });
   } catch (error) {
-    console.log("Error code:", error.code);
+    console.error("Error code:", error.code);
     if (error.code === 11000) {
       // 11000 ใช้เพื่อหาค่าที่ซ้ำกัน
       return res.status(409).json({
