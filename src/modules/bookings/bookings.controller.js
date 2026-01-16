@@ -17,10 +17,10 @@ export const getBookings = async (req, res, next) => {
 
 // route handler: GET a single booking by id from the database
 export const getBooking = async (req, res, next) => {
-  const { id } = req.params;
+  const { bid } = req.params;
 
   try {
-    const doc = await Booking.findById(id);
+    const doc = await Booking.findById(bid);
     if (!doc) {
       const error = new Error("Booking not found");
       return next(error);
@@ -39,9 +39,9 @@ export const getBooking = async (req, res, next) => {
 
 // route handler: create a new booking in the database
 export const createBooking = async (req, res, next) => {
-  const { clientID, seniorID, packageID, schedule, location, startLocation, targetLocation, status } = req.body;
+  const { clientID, packageID, schedule, status } = req.body;
 
-  if (!clientID || !seniorID || !packageID || !schedule || !(location || !(startLocation && targetLocation)) || !status ) {
+  if (!clientID || !packageID || !schedule || !status ) {
     const error = new Error("missing some required information");
     error.name = "ValidationError";
     error.status = 400;
@@ -49,7 +49,7 @@ export const createBooking = async (req, res, next) => {
   }
 
   try {
-    const doc = await Booking.create({ clientID, seniorID, packageID, schedule, startLocation, clientNote, status });
+    const doc = await Booking.create({ clientID, packageID, schedule, status });
     const safe = doc.toObject();
 
     return res.status(201).json({
@@ -63,3 +63,34 @@ export const createBooking = async (req, res, next) => {
     return next(error);
   }
 };
+
+// route handler: update a booking in the database
+export const updateBooking = async (req, res, next) => {
+  const { bid } = req.params;
+
+  const body = req.body;
+
+  try {
+    const updated = await Booking.findByIdAndUpdate(bid, body, { runValidators: true });
+
+    if (!updated) {
+      const error = new Error("Booking not found...");
+
+      return next(error);
+    }
+
+    const safe = updated.toObject();
+    // delete safe.password;
+
+    return res.status(200).json({
+      success: true,
+      data: safe,
+    });
+  } catch (error) {
+    if (error.code === 11000) {
+      return next(error);
+    }
+    return next(error);
+  }
+};
+

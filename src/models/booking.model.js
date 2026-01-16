@@ -79,8 +79,7 @@ const bookingSchema = new mongoose.Schema(
     },
     seniorID: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Senior",
-        required: true
+        ref: "Senior"
     },
     packageID: {
         type: mongoose.Schema.Types.ObjectId,
@@ -123,18 +122,23 @@ const paymentSchema = new mongoose.Schema(
         required: true
     },
     billingSnapshot: {
-        firstName: { type: String, trim: true, required: true },
-        lastName: { type: String, trim: true, required: true },
-        address: { type: String, trim: true, required: true },
-        phone: { type: String, trim: true, required: true },
+        firstName: { type: String, trim: true },
+        lastName: { type: String, trim: true },
+        address: { type: String, trim: true },
+        phone: { type: String, trim: true },
     },
     numberPackage: { type: Number, required: true },
     totalAmount: { type: Number, required: true },
-    discount: { type: Number, required: true },
+    discount: { type: Number },
     netAmount: { type: Number, required: true },
-    payentMethod: { type: String, enum: ["CARD", "TRANSFER"], required: true },
+    payentMethod: { type: String, enum: ["CARD", "TRANSFER"] },
     status: { type: String, enum: ["PENDING", "PAID", "FAIL"], required: true },
-    paidAt: { type: Date }
+    paidAt: { type: Date },
+    clientID: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Client",
+        required: true
+    }
   },
   {
     timestamps: true,

@@ -2,9 +2,9 @@
 GET http://localhost:3000/api/v1/bookings
 
 ### GET request to read a booking
-GET http://localhost:3000/api/v1/bookings/65a05001f1a2b3c4d5e6f706
+GET http://localhost:3000/api/v1/bookings/69691632b745863fe4b4e8d8
 
-### POST request to create a new user
+### POST request to create a booking
 POST http://localhost:3000/api/v1/bookings
 Content-Type: application/json
 
@@ -15,10 +15,17 @@ Content-Type: application/json
         "startDate": "2026-03-14",
         "endDate": "2026-03-14"
     },
-    "clientNote": "",
     "clientID": "65a02001f1a2b3c4d5e6f401",
-    "seniorID": "65a03001f1a2b3c4d5e6f501",
     "packageID": "659e1001f1a2b3c4d5e6f003"
 }
 
+### PATCH request to update a booking
+PATCH http://localhost:3000/api/v1/bookings/69691632b745863fe4b4e8d8
+Content-Type: application/json
+
+{
+    "seniorID": "65a03001f1a2b3c4d5e6f501",
+    "clientNote": "พาไปเดินเล่นบ่อยๆนะครับ",
+    "location": "455 บ้านหนองจอก แขวงคอกบัวบ้าน เขตบางระจัน กรุงเทพ 12345"
+}
 
