@@ -1,0 +1,33 @@
+### GET request to read all bookings
+GET http://localhost:3000/api/v1/bookings
+
+### GET request to read a booking
+GET http://localhost:3000/api/v1/bookings/69691632b745863fe4b4e8d8
+
+### POST request to create a booking
+POST http://localhost:3000/api/v1/bookings
+Content-Type: application/json
+
+{
+    "location": "ท่าพระราม",
+    "status": "PENDING",
+    "schedule": {
+        "startDate": "2026-03-14",
+        "endDate": "2026-03-14"
+    },
+    "clientID": "65a02001f1a2b3c4d5e6f401",
+    "packageID": "659e1001f1a2b3c4d5e6f003"
+}
+
+### PATCH request to update a booking
+PATCH http://localhost:3000/api/v1/bookings/69691632b745863fe4b4e8d8
+Content-Type: application/json
+
+{
+    "seniorID": "65a03001f1a2b3c4d5e6f501",
+    "clientNote": "พาไปเดินเล่นบ่อยๆนะครับ",
+    "location": "455 บ้านหนองจอก แขวงคอกบัวบ้าน เขตบางระจัน กรุงเทพ 12345",
+    "billingID": "6969d2ea355b3bb5de8d9a58",
+    "status": "SCHEDULED"
+}
+

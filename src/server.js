@@ -4,10 +4,19 @@ import morgan from "morgan";
 import { router as apiRouter } from "./routes/index.js";
 import { connectDB } from "./config/db.js";
 
-const app = express();
+const port = process.env.PORT || 3000;
+
+const corsOptions = {
+    origin: [
+        "http://localhost:5173",
+        "http://localhost:5174",
+        "http://localhost:5175"
+    ],
+    credentials: true // ✅ allow cookies to be sent
+};
 
 // Middlewares allows cross Domains
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(morgan("dev")); //show log
 app.use(express.json()); // read JSON
 
