@@ -86,9 +86,9 @@ const bookingSchema = new mongoose.Schema(
         ref: "Package",
         required: true
     },
-    paymentID: {
+    billingID: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Payment"
+        ref: "Billing"
     }
   },
   {
@@ -96,8 +96,8 @@ const bookingSchema = new mongoose.Schema(
   }
 );
 
-// PAYMENT
-// shoppingCartItemSchema for using in paymentSchema
+// BILLING
+// shoppingCartItemSchema for using in billingSchema
 const shoppingCartItemSchema = new mongoose.Schema(
   {
     bookingID: {
@@ -114,8 +114,8 @@ const shoppingCartItemSchema = new mongoose.Schema(
   { _id: false }
 );
 
-// data model of payments based on designed data schema of payments collection
-const paymentSchema = new mongoose.Schema(
+// data model of billings based on designed data schema of billings collection
+const billingSchema = new mongoose.Schema(
   {
     shoppingCart: {
         type: [shoppingCartItemSchema],
@@ -150,5 +150,5 @@ export const Client = mongoose.model("Client", clientSchema);
 export const Senior = mongoose.model("Senior", seniorSchema);
 export const Package = mongoose.model("Package", packageSchema);
 export const Booking = mongoose.model("Booking", bookingSchema);
-export const Payment = mongoose.model("Payment", paymentSchema);
+export const Billing = mongoose.model("Billing", billingSchema);
 

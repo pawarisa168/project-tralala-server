@@ -1,11 +1,11 @@
-### GET request to read all payments of specific clientID
-GET http://localhost:3000/api/v1/bookings/65a02001f1a2b3c4d5e6f401/payments
+### GET request to read all billings of specific clientID
+GET http://localhost:3000/api/v1/bookings/65a02001f1a2b3c4d5e6f401/billings
 
-### GET request to read a payment of specific clientID
-GET http://localhost:3000/api/v1/bookings/65a02001f1a2b3c4d5e6f401/payments/6969d2ea355b3bb5de8d9a58
+### GET request to read a billing of specific clientID
+GET http://localhost:3000/api/v1/bookings/65a02001f1a2b3c4d5e6f401/billings/6969d2ea355b3bb5de8d9a58
 
-### POST request to create a payment
-POST http://localhost:3000/api/v1/bookings/69691632b745863fe4b4e8d8/payments
+### POST request to create a billing
+POST http://localhost:3000/api/v1/bookings/69691632b745863fe4b4e8d8/billings
 Content-Type: application/json
 
 {
@@ -22,8 +22,8 @@ Content-Type: application/json
     "status": "PENDING"
 }
 
-### PATCH request to update a payment
-PATCH http://localhost:3000/api/v1/bookings/69691632b745863fe4b4e8d8/payments/6969d2ea355b3bb5de8d9a58
+### PATCH request to update a billing
+PATCH http://localhost:3000/api/v1/bookings/69691632b745863fe4b4e8d8/billings/6969d2ea355b3bb5de8d9a58
 Content-Type: application/json
 
 {

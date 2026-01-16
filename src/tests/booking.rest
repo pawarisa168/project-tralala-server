@@ -10,7 +10,7 @@ Content-Type: application/json
 
 {
     "location": "ท่าพระราม",
-    "status": "SCHEDULED",
+    "status": "PENDING",
     "schedule": {
         "startDate": "2026-03-14",
         "endDate": "2026-03-14"
@@ -26,6 +26,8 @@ Content-Type: application/json
 {
     "seniorID": "65a03001f1a2b3c4d5e6f501",
     "clientNote": "พาไปเดินเล่นบ่อยๆนะครับ",
-    "location": "455 บ้านหนองจอก แขวงคอกบัวบ้าน เขตบางระจัน กรุงเทพ 12345"
+    "location": "455 บ้านหนองจอก แขวงคอกบัวบ้าน เขตบางระจัน กรุงเทพ 12345",
+    "billingID": "6969d2ea355b3bb5de8d9a58",
+    "status": "SCHEDULED"
 }
 

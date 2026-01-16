@@ -6,11 +6,11 @@ import {
     updateBooking
 } from "../../modules/bookings/bookings.controller.js";
 import {
-    getPayments,
-    getPayment,
-    createPayment,
-    updatePayment
-} from "../../modules/bookings/payments.controller.js";
+    getBillings,
+    getBilling,
+    createBilling,
+    updateBilling
+} from "../../modules/bookings/billings.controller.js";
 
 export const router = Router();
 
@@ -27,16 +27,16 @@ router.post("/", createBooking);
 // Add senior field to a booking document
 router.patch("/:bid", updateBooking);
 
-// PAYMENT
-// Retieve all payments information of specific clientID
-router.get("/:cid/payments", getPayments);
+// Billing
+// Retieve all billings information of specific clientID
+router.get("/:cid/billings", getBillings);
 
-// Retieve a specific payment information of specific clientID
-router.get("/:cid/payments/:id", getPayment);
+// Retieve a specific Billing information of specific clientID
+router.get("/:cid/billings/:id", getBilling);
 
-// Create a payment document
-router.post("/:bid/payments", createPayment);
+// Create a Billing document
+router.post("/:bid/billings", createBilling);
 
 // Add senior field to a booking document
-router.patch("/:bid/payments/:id", updatePayment);
+router.patch("/:bid/billings/:id", updateBilling);
 

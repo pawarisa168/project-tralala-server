@@ -1,15 +1,15 @@
-import { Payment } from "../../models/booking.model.js";
+import { Billing } from "../../models/booking.model.js";
 
-// route handler: get all payments from the database
-export const getPayments = async (req, res, next) => {
+// route handler: get all billings from the database
+export const getBillings = async (req, res, next) => {
   const { cid } = req.params;
   
 
   try {
-    const payments = await Payment.find({ clientID: cid });
+    const billings = await Billing.find({ clientID: cid });
     return res.status(200).json({
       success: true,
-      data: payments
+      data: billings
     });
   } catch (error) {
     error.name = error.name || "DatabaseError";
@@ -18,14 +18,14 @@ export const getPayments = async (req, res, next) => {
   }
 };
 
-// route handler: GET a single Payment by id from the database
-export const getPayment = async (req, res, next) => {
+// route handler: GET a single Billing by id from the database
+export const getBilling = async (req, res, next) => {
   const { cid, id } = req.params;
 
   try {
-    const doc = await Payment.findById(id).find({ clientID: cid });
+    const doc = await Billing.findById(id).find({ clientID: cid });
     if (!doc) {
-      const error = new Error("Payment not found");
+      const error = new Error("Billing not found");
       return next(error);
     }
     return res.status(200).json({
@@ -35,13 +35,13 @@ export const getPayment = async (req, res, next) => {
   } catch (error) {
     error.status = 500;
     error.name = error.name || "DatabaseError";
-    error.message = error.message || "Failed to get a Payment";
+    error.message = error.message || "Failed to get a Billing";
     return next(error);
   }
 };
 
-// route handler: create a new Payment in the database
-export const createPayment = async (req, res, next) => {
+// route handler: create a new Billing in the database
+export const createBilling = async (req, res, next) => {
   const { clientID, shoppingCart, numberPackage, totalAmount, discount, netAmount, status } = req.body;
 
   if (!clientID || !shoppingCart || !numberPackage || !totalAmount || !netAmount || !status ) {
@@ -52,7 +52,7 @@ export const createPayment = async (req, res, next) => {
   }
 
   try {
-    const doc = await Payment.create({ clientID, shoppingCart, numberPackage, totalAmount, discount, netAmount, status });
+    const doc = await Billing.create({ clientID, shoppingCart, numberPackage, totalAmount, discount, netAmount, status });
     const safe = doc.toObject();
 
     return res.status(201).json({
@@ -67,17 +67,17 @@ export const createPayment = async (req, res, next) => {
   }
 };
 
-// route handler: update a Payment in the database
-export const updatePayment = async (req, res, next) => {
+// route handler: update a Billing in the database
+export const updateBilling = async (req, res, next) => {
   const { bid, id } = req.params;
 
   const body = req.body;
 
   try {
-    const updated = await Payment.findByIdAndUpdate(id, body, { runValidators: true });
+    const updated = await Billing.findByIdAndUpdate(id, body, { runValidators: true });
 
     if (!updated) {
-      const error = new Error("Payment not found...");
+      const error = new Error("Billing not found...");
 
       return next(error);
     }
