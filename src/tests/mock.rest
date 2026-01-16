@@ -3,5 +3,11 @@ GET  http://localhost:3000/api/mock/services
 Content-Type: application/json
 
 ###
-POST http://localhost:3000/api/mock/creteServices
+POST http://localhost:3000/api/mock/createService
 Content-Type:  application/json
+
+        {
+            "name": "แพ็คงาน",
+            "description": "รักษาตลอดชีพ",
+            "price": "2500"
+        }
