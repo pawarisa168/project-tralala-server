@@ -4,7 +4,7 @@ import morgan from "morgan";
 import { router as apiRouter } from "./routes/index.js";
 import { connectDB } from "./config/db.js";
 
-const app = express();
+const port = process.env.PORT || 3000;
 
 const corsOptions = {
     origin: [
