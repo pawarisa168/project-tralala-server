@@ -1,0 +1,39 @@
+### GET request to read all billings of specific clientID
+GET http://localhost:3000/api/v1/bookings/65a02001f1a2b3c4d5e6f401/billings
+
+### GET request to read a billing of specific clientID
+GET http://localhost:3000/api/v1/bookings/65a02001f1a2b3c4d5e6f401/billings/6969d2ea355b3bb5de8d9a58
+
+### POST request to create a billing
+POST http://localhost:3000/api/v1/bookings/69691632b745863fe4b4e8d8/billings
+Content-Type: application/json
+
+{
+    "clientID": "65a02001f1a2b3c4d5e6f401",
+    "shoppingCart": [
+        {
+            "bookingID": "69691632b745863fe4b4e8d8",
+            "packageID": "659e1001f1a2b3c4d5e6f001"
+        }
+    ],
+    "numberPackage": 1,
+    "totalAmount": 1200,
+    "netAmount": 1200,
+    "status": "PENDING"
+}
+
+### PATCH request to update a billing
+PATCH http://localhost:3000/api/v1/bookings/69691632b745863fe4b4e8d8/billings/6969d2ea355b3bb5de8d9a58
+Content-Type: application/json
+
+{
+  "billingSnapshot": {
+    "firstName": "สมชาย",
+    "lastName": "รักษาสุข",
+    "address": "888 ซอยสุขุมวิท 3 แขวงคลองเตยเหนือ เขตวัฒนา กรุงเทพมหานคร 10110",
+    "phone": "0812345678"
+  },
+  "paymentMethod": "TRANSFER",
+  "status": "PAID"
+}
+
