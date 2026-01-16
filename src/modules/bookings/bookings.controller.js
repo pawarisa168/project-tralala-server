@@ -39,7 +39,7 @@ export const getBooking = async (req, res, next) => {
 
 // route handler: create a new booking in the database
 export const createBooking = async (req, res, next) => {
-  const { clientID, seniorID, packageID, schedule, location, startLocation, targetLocation, clientNote, status } = req.body;
+  const { clientID, seniorID, packageID, schedule, location, startLocation, targetLocation, status } = req.body;
 
   if (!clientID || !seniorID || !packageID || !schedule || !(location || !(startLocation && targetLocation)) || !status ) {
     const error = new Error("missing some required information");
