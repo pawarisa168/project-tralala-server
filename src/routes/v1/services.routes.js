@@ -1,5 +1,9 @@
 import { Router } from "express";
+import { getServices, getServicesId } from "../../controller/services.controller.js";
 
-export const router = Router();
+const serviceRouter = Router();
 
-// http://localhost:3000/api/v1/services
+serviceRouter.get("/services", getServices);
+serviceRouter.get("/services/:id", getServicesId);
+
+export default serviceRouter;
