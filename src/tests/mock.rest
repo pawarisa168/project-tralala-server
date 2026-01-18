@@ -7,7 +7,7 @@ POST http://localhost:3000/api/mock/createService
 Content-Type:  application/json
 
         {
-            "name": "ป๋าหนุน",
+            "name": "ป๋าเอ็ม",
             "description": "รักษาตลอดชีพ",
-            "price": "2500"
+            "price": "1800"
         }
