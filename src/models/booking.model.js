@@ -1,64 +1,5 @@
 import mongoose from "mongoose";
 
-// USER
-// data model of users based on designed data schema of users collection
-const userSchema = new mongoose.Schema(
-  {
-    username: { type: String, trim: true, required: true },
-    password: { type: String, trim: true, required: true, select: false },
-    role: { type: String, enum: ["ADMIN", "CLIENT", "CAREGIVER"], required: true },
-    status: { type: String, enum: ["ACTIVE", "INACTIVE", "CLOSED", "SUSPENDED"], required: true },
-    email: { type: String, trim: true, required: true },
-    createdAt: { type: Date, trim: true, required: true },
-  }
-);
-
-// CLIENT
-// data model of clients based on designed data schema of clients collection
-const clientSchema = new mongoose.Schema(
-  {
-    guardian: {
-        firstName: { type: String, trim: true, required: true },
-        lastName: { type: String, trim: true, required: true },
-        relationship: { type: String, trim: true, required: true },
-        phone: { type: String, trim: true, required: true },
-        email: { type: String, trim: true, required: true },
-   },
-    seniors: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Senior",
-            required: true
-        }
-    ],
-    userID: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true
-    }
-  }
-);
-
-// SENIOR
-// data model of seniors based on designed data schema of seniors collection
-const seniorSchema = new mongoose.Schema(
-  {
-    firstName: { type: String, trim: true, required: true },
-    lastName: { type: String, trim: true, required: true },
-    dob: { type: Date, default: null, required: true },
-  }
-);
-
-// PACKAGE
-// data model of packages based on designed data schema of packages collection
-const packageSchema = new mongoose.Schema(
-  {
-    name: { type: String, trim: true, required: true },
-    description: { type: String, trim: true, required: true },
-    price: { type: String, trim: true, required: true },
-  }
-);
-
 // BOOKING
 // data model of bookings based on designed data schema of bookings collection
 const bookingSchema = new mongoose.Schema(
@@ -89,7 +30,8 @@ const bookingSchema = new mongoose.Schema(
     billingID: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Billing"
-    }
+    },
+    seniorCareSummary: { type: String, trim: true }
   },
   {
     timestamps: true,
@@ -145,10 +87,76 @@ const billingSchema = new mongoose.Schema(
   }
 );
 
+// USER
+// data model of users based on designed data schema of users collection
+const userSchema = new mongoose.Schema(
+  {
+    username: { type: String, trim: true, required: true },
+    password: { type: String, trim: true, required: true, select: false },
+    role: { type: String, enum: ["ADMIN", "CLIENT", "CAREGIVER"], required: true },
+    status: { type: String, enum: ["ACTIVE", "INACTIVE", "CLOSED", "SUSPENDED"], required: true },
+    email: { type: String, trim: true, required: true },
+    createdAt: { type: Date, trim: true, required: true },
+  }
+);
+
+// CLIENT
+// data model of clients based on designed data schema of clients collection
+const clientSchema = new mongoose.Schema(
+  {
+    guardian: {
+        firstName: { type: String, trim: true, required: true },
+        lastName: { type: String, trim: true, required: true },
+        relationship: { type: String, trim: true, required: true },
+        phone: { type: String, trim: true, required: true },
+        email: { type: String, trim: true, required: true },
+   },
+    seniors: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Senior",
+            required: true
+        }
+    ],
+    userID: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+    }
+  }
+);
+
+// SENIOR
+// data model of seniors based on designed data schema of seniors collection
+const seniorSchema = new mongoose.Schema(
+  {
+    firstName: { type: String, trim: true, required: true },
+    lastName: { type: String, trim: true, required: true },
+    dob: { type: Date, default: null, required: true },
+    medicalProfile: {
+      mobilityLevel: { type: String, trim: true },
+      cognitiveStatus: { type: String, trim: true },
+      allergies: { type: Array, trim: true },
+      chronicConditions: { type: Array, trim: true }
+    }
+  }
+);
+
+// PACKAGE
+// data model of packages based on designed data schema of packages collection
+const packageSchema = new mongoose.Schema(
+  {
+    name: { type: String, trim: true, required: true },
+    description: { type: String, trim: true, required: true },
+    price: { type: String, trim: true, required: true },
+  }
+);
+
+
+export const Booking = mongoose.model("Booking", bookingSchema);
+export const Billing = mongoose.model("Billing", billingSchema);
 export const User = mongoose.model("User", userSchema);
 export const Client = mongoose.model("Client", clientSchema);
 export const Senior = mongoose.model("Senior", seniorSchema);
 export const Package = mongoose.model("Package", packageSchema);
-export const Booking = mongoose.model("Booking", bookingSchema);
-export const Billing = mongoose.model("Billing", billingSchema);
 
