@@ -1,5 +1,8 @@
 import { Router } from "express";
-import { getServices, getServicesId } from "../../controller/services.controller.js";
+import {
+  getServices,
+  getServicesId,
+} from "../../modules/services/services.controller.js";
 
 const serviceRouter = Router();
 

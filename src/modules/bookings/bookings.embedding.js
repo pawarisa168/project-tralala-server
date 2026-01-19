@@ -1,4 +1,5 @@
-import { Booking } from "../../models/booking.model.js";
+// import { Booking } from "../../models/booking.model.js";
+import { User } from "../../models/user.model.js";
 import {
   embedText,
   GEMINI_EMBEDDING_DIMS,
@@ -34,12 +35,12 @@ export const embedUserById = async (userId) => {
       },
       $inc: { "embedding.attempts": 1 },
     },
-    { new: false }
+    { new: false },
   );
 
   try {
     const user = await User.findById(userId).select(
-      "username email role embedding.status"
+      "username email role embedding.status",
     );
 
     if (!user) {
@@ -63,7 +64,7 @@ export const embedUserById = async (userId) => {
           "embedding.lastError": null,
         },
       },
-      { new: false }
+      { new: false },
     );
 
     return { ok: true };
@@ -78,7 +79,7 @@ export const embedUserById = async (userId) => {
           "embedding.lastError": message,
         },
       },
-      { new: false }
+      { new: false },
     );
     return { ok: false, error: message };
   }
