@@ -1,5 +1,12 @@
 import { Router } from "express";
+import { getServices, getServicesId } from "../../controller/services.controller.js";
 
-export const router = Router();
+const serviceRouter = Router();
 
-// http://localhost:3000/api/v1/services
+// ดูบริการทั้งหมด
+serviceRouter.get("/serviceslist", getServices);
+
+// ดูข้อมูลบริการตามไอดี
+serviceRouter.get("/serviceslist/:id", getServicesId);
+
+export default serviceRouter;

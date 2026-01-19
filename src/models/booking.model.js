@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+
 // BOOKING
 // data model of bookings based on designed data schema of bookings collection
 const bookingSchema = new mongoose.Schema(
@@ -7,25 +8,29 @@ const bookingSchema = new mongoose.Schema(
     location: { type: String, trim: true },
     startLocation: { type: String, trim: true },
     targetLocation: { type: String, trim: true },
-    status: { type: String, enum: ["SCHEDULED", "ACTIVE", "PENDING", "COMPLETED", "CANCELLED"], required: true },
+    status: {
+      type: String,
+      enum: ["SCHEDULED", "ACTIVE", "PENDING", "COMPLETED", "CANCELLED"],
+      required: true,
+    },
     schedule: {
-        startDate: { type: Date, required: true },
-        endDate: { type: Date, required: true }
+      startDate: { type: Date, required: true },
+      endDate: { type: Date, required: true },
     },
     clientNote: { type: String, trim: true },
     clientID: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Client",
-        required: true
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Client",
+      required: true,
     },
     seniorID: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Senior"
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Senior",
     },
     packageID: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Package",
-        required: true
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Package",
+      required: true,
     },
     billingID: {
         type: mongoose.Schema.Types.ObjectId,
@@ -35,7 +40,7 @@ const bookingSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 // BILLING
@@ -45,29 +50,29 @@ const shoppingCartItemSchema = new mongoose.Schema(
     bookingID: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Booking",
-      required: true
+      required: true,
     },
     packageID: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Package",
-      required: true
-    }
+      required: true,
+    },
   },
-  { _id: false }
+  { _id: false },
 );
 
 // data model of billings based on designed data schema of billings collection
 const billingSchema = new mongoose.Schema(
   {
     shoppingCart: {
-        type: [shoppingCartItemSchema],
-        required: true
+      type: [shoppingCartItemSchema],
+      required: true,
     },
     billingSnapshot: {
-        firstName: { type: String, trim: true },
-        lastName: { type: String, trim: true },
-        address: { type: String, trim: true },
-        phone: { type: String, trim: true },
+      firstName: { type: String, trim: true },
+      lastName: { type: String, trim: true },
+      address: { type: String, trim: true },
+      phone: { type: String, trim: true },
     },
     numberPackage: { type: Number, required: true },
     totalAmount: { type: Number, required: true },
@@ -77,14 +82,14 @@ const billingSchema = new mongoose.Schema(
     status: { type: String, enum: ["PENDING", "PAID", "FAIL"], required: true },
     paidAt: { type: Date },
     clientID: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Client",
-        required: true
-    }
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Client",
+      required: true,
+    },
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 // USER

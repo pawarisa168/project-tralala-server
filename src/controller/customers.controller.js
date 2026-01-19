@@ -1,4 +1,4 @@
-export const createCustomers = (req, res, next) => {
+export const createCustomer = (req, res, next) => {
   try {
     res.status(200).json({
       success: true,

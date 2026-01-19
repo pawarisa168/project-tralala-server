@@ -2,17 +2,19 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import { router as apiRouter } from "./routes/index.js";
+import apiMock from "./mock/index.js";
 import { connectDB } from "./config/db.js";
+
 
 export const app = express();
 
 const corsOptions = {
-    origin: [
-        "http://localhost:5173",
-        "http://localhost:5174",
-        "http://localhost:5175"
-    ],
-    credentials: true // ✅ allow cookies to be sent
+  origin: [
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "http://localhost:5175",
+  ],
+  credentials: true, // ✅ allow cookies to be sent
 };
 
 // Middlewares allows cross Domains
@@ -22,6 +24,7 @@ app.use(express.json()); // read JSON
 
 //Routing
 app.use("/api", apiRouter);
+app.use("/api/mock", apiMock);
 
 //Error handling
 app.use((err, req, res, next) => {
