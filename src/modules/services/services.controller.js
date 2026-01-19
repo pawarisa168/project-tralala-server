@@ -1,0 +1,30 @@
+
+export const getServices = (req, res) => {
+  try {
+    res.status(200).json({
+      success: true,
+      message: "Choose your booking service ",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+      error,
+    });
+  }
+};
+
+export const getServicesId = (req, res) => {
+  try {
+    res.status(200).json({
+      success: true,
+      message: "Get service details successfully ",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+      error,
+    });
+  }
+};

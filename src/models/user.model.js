@@ -27,6 +27,11 @@ const UserSchema = new Schema(
       enum: ["CUSTOMER", "CAREGIVER"],
       required: true,
     },
+    status: {
+      type: String,
+      enum: ["ACTIVE", "INACTIVE", "CLOSED", "SUSPENDED"],
+      required: true,
+    },
   },
   { timestamps: true },
 );

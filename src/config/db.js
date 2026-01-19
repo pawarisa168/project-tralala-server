@@ -3,7 +3,7 @@ import "dotenv/config";
 
 export async function connectDB() {
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
+    await mongoose.connect(process.env.MONGODB_URI, { dbName: "tralala-express-app"});
     console.log("MongoDB connected ✅ ");
   } catch (error) {
     console.error("MongoDB connection error ❌", error);
