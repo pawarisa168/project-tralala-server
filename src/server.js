@@ -6,8 +6,8 @@ import { connectDB } from "./config/db.js";
 
 const app = express();
 
-// Middlewares allows cross Domains
-app.use(cors());
+// Middlewares
+app.use(cors()); //allows cross Domains
 app.use(morgan("dev")); //show log
 app.use(express.json()); // read JSON
 
@@ -15,10 +15,18 @@ app.use(express.json()); // read JSON
 app.use("/api", apiRouter);
 
 //Error handling
-app.use((err, req, res, next) => {
+app.use((error, req, res, next) => {
+  console.error(error);
+  // MongoDB duplicate key error
+  if (error.code === 11000) {
+    return res.status(409).json({
+      message: "ข้อมูลซ้ำ กรุณาใช้ข้อมูลอื่น",
+    });
+  }
+
   res
-    .status(err.code || 500)
-    .json({ message: err.message || "something wrong!!!" });
+    .status(error.code || 500)
+    .json({ message: error.message || "server error" });
 });
 
 const PORT = process.env.PORT || 3000;
