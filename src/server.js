@@ -5,9 +5,8 @@ import { router as apiRouter } from "./routes/index.js";
 import apiMock from "./mock/index.js";
 import { connectDB } from "./config/db.js";
 
-const app = express();
 
-const port = process.env.PORT || 3000;
+export const app = express();
 
 const corsOptions = {
   origin: [

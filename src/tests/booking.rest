@@ -31,3 +31,7 @@ Content-Type: application/json
     "status": "SCHEDULED"
 }
 
+### PATCH request to generate an ai suggestion into a specific booking document
+PATCH http://localhost:3000/api/v1/bookings/696dc09c59c3fc008b8a0d2b/ai/suggestion
+
+
