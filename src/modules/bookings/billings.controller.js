@@ -3,7 +3,7 @@ import { Billing } from "../../models/booking.model.js";
 // route handler: get all billings from the database
 export const getBillings = async (req, res, next) => {
   const { cid } = req.params;
-  
+
 
   try {
     const billings = await Billing.find({ clientID: cid });

@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { User } from "./auth.models.js";
 
 // USER
 // data model of users based on designed data schema of users collection
