@@ -1,6 +1,7 @@
 ### GET
-http://localhost:3000/api/v1/services/serviceslist
+GET http://localhost:3000/api/v1/services/serviceslist
 Content-Type: application/json
 
 ### GET
-http://localhost:3000/api/v1/services/serviceslist/:id
+GET http://localhost:3000/api/v1/services/serviceslist/:id
+Content-Type: application/json
