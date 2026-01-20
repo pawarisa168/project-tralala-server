@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const mockData = new mongoose.Schema(
   {
-    name: { type: String, required: true,},
+    name: { type: String, unique: true, required: true },
     description: { type: String },
     price: { type: Number },
   },

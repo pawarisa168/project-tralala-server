@@ -1,0 +1,16 @@
+### POST
+POST http://localhost:3000/api/v1/customers/customer
+Content-Type: application/json
+
+        {
+            "name": "สมชาย ใจดี",
+            "email": "somchai.jaidee@example.com"
+        }
+
+### GET
+GET http://localhost:3000/api/v1/customers/customer/me
+Content-Type:  application/json
+
+### GET
+GET http://localhost:3000/api/v1/customers/customers/:id
+Content-Type: application/json

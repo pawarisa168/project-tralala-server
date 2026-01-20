@@ -1,15 +1,14 @@
-import { Billing } from "../../models/booking.model.js";
+import { Billing } from "../../models/billing.model.js";
 
 // route handler: get all billings from the database
 export const getBillings = async (req, res, next) => {
   const { cid } = req.params;
-  
 
   try {
     const billings = await Billing.find({ clientID: cid });
     return res.status(200).json({
       success: true,
-      data: billings
+      data: billings,
     });
   } catch (error) {
     error.name = error.name || "DatabaseError";
@@ -42,9 +41,24 @@ export const getBilling = async (req, res, next) => {
 
 // route handler: create a new Billing in the database
 export const createBilling = async (req, res, next) => {
-  const { clientID, shoppingCart, numberPackage, totalAmount, discount, netAmount, status } = req.body;
+  const {
+    clientID,
+    shoppingCart,
+    numberPackage,
+    totalAmount,
+    discount,
+    netAmount,
+    status,
+  } = req.body;
 
-  if (!clientID || !shoppingCart || !numberPackage || !totalAmount || !netAmount || !status ) {
+  if (
+    !clientID ||
+    !shoppingCart ||
+    !numberPackage ||
+    !totalAmount ||
+    !netAmount ||
+    !status
+  ) {
     const error = new Error("missing some required information");
     error.name = "ValidationError";
     error.status = 400;
@@ -52,7 +66,15 @@ export const createBilling = async (req, res, next) => {
   }
 
   try {
-    const doc = await Billing.create({ clientID, shoppingCart, numberPackage, totalAmount, discount, netAmount, status });
+    const doc = await Billing.create({
+      clientID,
+      shoppingCart,
+      numberPackage,
+      totalAmount,
+      discount,
+      netAmount,
+      status,
+    });
     const safe = doc.toObject();
 
     return res.status(201).json({
@@ -74,7 +96,9 @@ export const updateBilling = async (req, res, next) => {
   const body = req.body;
 
   try {
-    const updated = await Billing.findByIdAndUpdate(id, body, { runValidators: true });
+    const updated = await Billing.findByIdAndUpdate(id, body, {
+      runValidators: true,
+    });
 
     if (!updated) {
       const error = new Error("Billing not found...");
@@ -96,4 +120,3 @@ export const updateBilling = async (req, res, next) => {
     return next(error);
   }
 };
-
