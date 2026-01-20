@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { User } from "./auth.models.js";
 
 
 // BOOKING
@@ -92,19 +93,6 @@ const billingSchema = new mongoose.Schema(
   },
 );
 
-// USER
-// data model of users based on designed data schema of users collection
-const userSchema = new mongoose.Schema(
-  {
-    username: { type: String, trim: true, required: true },
-    password: { type: String, trim: true, required: true, select: false },
-    role: { type: String, enum: ["ADMIN", "CLIENT", "CAREGIVER"], required: true },
-    status: { type: String, enum: ["ACTIVE", "INACTIVE", "CLOSED", "SUSPENDED"], required: true },
-    email: { type: String, trim: true, required: true },
-    createdAt: { type: Date, trim: true, required: true },
-  }
-);
-
 // CLIENT
 // data model of clients based on designed data schema of clients collection
 const clientSchema = new mongoose.Schema(
@@ -160,7 +148,6 @@ const packageSchema = new mongoose.Schema(
 
 export const Booking = mongoose.model("Booking", bookingSchema);
 export const Billing = mongoose.model("Billing", billingSchema);
-export const User = mongoose.model("User", userSchema);
 export const Client = mongoose.model("Client", clientSchema);
 export const Senior = mongoose.model("Senior", seniorSchema);
 export const Package = mongoose.model("Package", packageSchema);
