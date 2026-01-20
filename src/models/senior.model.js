@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 // SENIOR
 // data model of seniors based on designed data schema of seniors collection
 const seniorSchema = new mongoose.Schema({

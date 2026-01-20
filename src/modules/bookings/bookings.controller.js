@@ -42,7 +42,7 @@ export const getBooking = async (req, res, next) => {
 export const createBooking = async (req, res, next) => {
   const { clientID, packageID, schedule, status } = req.body;
 
-  if (!clientID || !packageID || !schedule || !status ) {
+  if (!clientID || !packageID || !schedule || !status) {
     const error = new Error("missing some required information");
     error.name = "ValidationError";
     error.status = 400;
@@ -72,7 +72,9 @@ export const updateBooking = async (req, res, next) => {
   const body = req.body;
 
   try {
-    const updated = await Booking.findByIdAndUpdate(bid, body, { runValidators: true });
+    const updated = await Booking.findByIdAndUpdate(bid, body, {
+      runValidators: true,
+    });
 
     if (!updated) {
       const error = new Error("Booking not found...");
@@ -84,7 +86,7 @@ export const updateBooking = async (req, res, next) => {
 
     return res.status(200).json({
       success: true,
-      data: safe
+      data: safe,
     });
   } catch (error) {
     if (error.code === 11000) {
@@ -100,19 +102,21 @@ export const aiCareSuggestion = async (req, res, next) => {
 
   try {
     const source = await Booking.findById(bid)
-      .select("location startLocation targetLocation clientNote seniorID packageID caregiverID")
+      .select(
+        "location startLocation targetLocation clientNote seniorID packageID caregiverID",
+      )
       .populate({
         path: "seniorID",
-        select: "medicalProfile dob gender"
+        select: "medicalProfile dob gender",
       })
       .populate({
         path: "packageID",
-        select: "name description maxTime timeRange"
-      })
-      // .populate({
-      //   path: "caregiverID",
-      //   select: "skills"
-      // })
+        select: "name description maxTime timeRange",
+      });
+    // .populate({
+    //   path: "caregiverID",
+    //   select: "skills"
+    // })
 
     if (!source) {
       return next(new Error("Booking not found"));
@@ -120,11 +124,15 @@ export const aiCareSuggestion = async (req, res, next) => {
 
     const contextLines = [source].map((s) => {
       const clientNote = s?.clientNote ? String(s.clientNote) : "";
-      const medicalProfile = s?.seniorID.medicalProfile ? JSON.stringify(s.seniorID.medicalProfile) : "";
+      const medicalProfile = s?.seniorID.medicalProfile
+        ? JSON.stringify(s.seniorID.medicalProfile)
+        : "";
       const dob = s?.seniorID.dob ? String(s.seniorID.dob) : "";
       const gender = s?.seniorID.gender ? String(s.seniorID.gender) : "";
       const serviceName = s?.packageID.name ? String(s.packageID.name) : "";
-      const serviceDescription = s?.packageID.description ? String(s.packageID.description) : "";
+      const serviceDescription = s?.packageID.description
+        ? String(s.packageID.description)
+        : "";
       // const serviceMaxTime = s?.packageID.maxTime ? String(s.packageID.maxTime) : "";
       // const serviceTimeRange = s?.packageID.timeRange ? String(s.packageID.timeRange) : "";
       // const location = s?.location ? String(s.location) : "";
@@ -156,7 +164,7 @@ export const aiCareSuggestion = async (req, res, next) => {
       "INSTRUCTIONS:",
       "- You are a caregiver of a senior care platform with certified senior care.",
       "- Ananylzed indight in the retrieved context and gernerate suggestions for a caregiver to improve the senior care",
-      "- Generate a brief suggestions in Thai language and easy to understand"
+      "- Generate a brief suggestions in Thai language and easy to understand",
     ].join("\n");
 
     let answer = null;
@@ -172,7 +180,7 @@ export const aiCareSuggestion = async (req, res, next) => {
     const updated = await Booking.findByIdAndUpdate(
       bid,
       { seniorCareSummary: answer },
-      { new: true, runValidators: true }
+      { new: true, runValidators: true },
     );
 
     if (!updated) {
@@ -187,10 +195,7 @@ export const aiCareSuggestion = async (req, res, next) => {
       success: true,
       data: safe,
     });
-
   } catch (error) {
     next(error);
   }
 };
-
-

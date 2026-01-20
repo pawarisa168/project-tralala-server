@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 // CLIENT
 // data model of clients based on designed data schema of clients collection
 const clientSchema = new mongoose.Schema({
