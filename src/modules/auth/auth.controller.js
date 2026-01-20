@@ -50,17 +50,17 @@ export const login = async (req, res) => {
       // เอาไว้เก็บช้อมูลไปส่งหน้าบ้าน
       const payload = {
         user: {
-          username: user.username,
-          email: user.email,
+          id: user._id,
           role: user.role,
         },
       };
+      console.log(payload);
 
       //generate token
       jwt.sign(
         payload,
         process.env.JWT_SECRET,
-        { expiresIn: 20 },
+        { expiresIn: "1d" },
         (error, token) => {
           if (error) throw error;
           res.json({ token, payload });
