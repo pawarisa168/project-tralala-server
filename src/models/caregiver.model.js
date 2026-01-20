@@ -68,6 +68,35 @@ const CaregiverSchema = new Schema({
     average: Number,
     totalReviews: Number,
   },
-});
+  clientID: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  firstName: { type: String, trim: true, required: true },
+  lastName: { type: String, trim: true, required: true },
+  gender: { type: String, trim: true, required: true },
+  dob: { type: Date, default: null, required: true },
+  phone: { type: String, trim: true, required: true },
+  email: { type: String, trim: true, required: true },
+  address: { type: String, trim: true, required: true },
+  embedding: {
+    status: {
+      type: String,
+      enum: ["PENDING", "PROCESSING", "READY", "FAILED"],
+      default: "PENDING",
+    },
+    dims: { type: Number, default: 3072 },
+    vector: { type: [Number], select: false },
+    attempts: { type: Number, default: 0 },
+    lastAttemptAt: { type: Date, default: null },
+    updatedAt: { type: Date, default: null },
+    lastError: { type: String, default: null },
+  }
+  },
+  {
+    timestamps: true,
+  }
+);
 
 export const Caregiver = model("Caregiver", CaregiverSchema);
