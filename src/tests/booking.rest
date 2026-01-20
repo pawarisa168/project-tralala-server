@@ -15,23 +15,23 @@ Content-Type: application/json
         "startDate": "2026-03-14",
         "endDate": "2026-03-14"
     },
-    "clientID": "65a02001f1a2b3c4d5e6f401",
-    "packageID": "659e1001f1a2b3c4d5e6f003"
+    "customerID": "65a02001f1a2b3c4d5e6f401",
+    "serviceID": "659e1001f1a2b3c4d5e6f003"
 }
 
 ### PATCH request to update a booking
-PATCH http://localhost:3000/api/v1/bookings/69691632b745863fe4b4e8d8
+PATCH http://localhost:3000/api/v1/bookings/696f48a9ef9b9c30db4128b9
 Content-Type: application/json
 
 {
     "seniorID": "65a03001f1a2b3c4d5e6f501",
-    "clientNote": "พาไปเดินเล่นบ่อยๆนะครับ",
+    "customerNote": "พาไปเดินเล่นบ่อยๆนะครับ",
     "location": "455 บ้านหนองจอก แขวงคอกบัวบ้าน เขตบางระจัน กรุงเทพ 12345",
     "billingID": "6969d2ea355b3bb5de8d9a58",
     "status": "SCHEDULED"
 }
 
 ### PATCH request to generate an ai suggestion into a specific booking document
-PATCH http://localhost:3000/api/v1/bookings/696dc09c59c3fc008b8a0d2b/ai/suggestion
+PATCH http://localhost:3000/api/v1/bookings/696f48a9ef9b9c30db4128b9/ai/suggestion
 
 

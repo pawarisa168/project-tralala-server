@@ -1,4 +1,8 @@
 import mongoose from "mongoose";
+import { Senior } from "./senior.model.js";
+import { Customer } from "./customers.model.js";
+import { Service } from "./services.models.js";
+import { Billing } from "./billing.model.js";
 
 // BOOKING
 // data model of bookings based on designed data schema of bookings collection
@@ -16,19 +20,19 @@ const bookingSchema = new mongoose.Schema(
       startDate: { type: Date, required: true },
       endDate: { type: Date, required: true },
     },
-    clientNote: { type: String, trim: true },
-    clientID: {
+    customerID: { type: String, trim: true },
+    customerID: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Client",
+      ref: "Customer",
       required: true,
     },
     seniorID: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Senior",
     },
-    packageID: {
+    serviceID: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Package",
+      ref: "Service",
       required: true,
     },
     billingID: {

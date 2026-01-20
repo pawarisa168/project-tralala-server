@@ -40,9 +40,9 @@ export const getBooking = async (req, res, next) => {
 
 // route handler: create a new booking in the database
 export const createBooking = async (req, res, next) => {
-  const { clientID, packageID, schedule, status } = req.body;
+  const { customerID, serviceID, schedule, status } = req.body;
 
-  if (!clientID || !packageID || !schedule || !status) {
+  if (!customerID || !serviceID || !schedule || !status) {
     const error = new Error("missing some required information");
     error.name = "ValidationError";
     error.status = 400;
@@ -50,7 +50,7 @@ export const createBooking = async (req, res, next) => {
   }
 
   try {
-    const doc = await Booking.create({ clientID, packageID, schedule, status });
+    const doc = await Booking.create({ customerID, serviceID, schedule, status });
     const safe = doc.toObject();
 
     return res.status(201).json({
@@ -103,14 +103,14 @@ export const aiCareSuggestion = async (req, res, next) => {
   try {
     const source = await Booking.findById(bid)
       .select(
-        "location startLocation targetLocation clientNote seniorID packageID caregiverID",
+        "location startLocation targetLocation customerNote seniorID serviceID caregiverID",
       )
       .populate({
         path: "seniorID",
         select: "medicalProfile dob gender",
       })
       .populate({
-        path: "packageID",
+        path: "serviceID",
         select: "name description maxTime timeRange",
       });
     // .populate({
@@ -123,24 +123,24 @@ export const aiCareSuggestion = async (req, res, next) => {
     }
 
     const contextLines = [source].map((s) => {
-      const clientNote = s?.clientNote ? String(s.clientNote) : "";
+      const customerNote = s?.customerNote ? String(s.customerNote) : "";
       const medicalProfile = s?.seniorID.medicalProfile
         ? JSON.stringify(s.seniorID.medicalProfile)
         : "";
       const dob = s?.seniorID.dob ? String(s.seniorID.dob) : "";
       const gender = s?.seniorID.gender ? String(s.seniorID.gender) : "";
-      const serviceName = s?.packageID.name ? String(s.packageID.name) : "";
-      const serviceDescription = s?.packageID.description
-        ? String(s.packageID.description)
+      const serviceName = s?.serviceID.name ? String(s.serviceID.name) : "";
+      const serviceDescription = s?.serviceID.description
+        ? String(s.serviceID.description)
         : "";
-      // const serviceMaxTime = s?.packageID.maxTime ? String(s.packageID.maxTime) : "";
-      // const serviceTimeRange = s?.packageID.timeRange ? String(s.packageID.timeRange) : "";
+      // const serviceMaxTime = s?.serviceID.maxTime ? String(s.serviceID.maxTime) : "";
+      // const serviceTimeRange = s?.serviceID.timeRange ? String(s.serviceID.timeRange) : "";
       // const location = s?.location ? String(s.location) : "";
       // const startLocation = s?.startLocation ? String(s.startLocation) : "";
       // const targetLocation = s?.targetLocation ? String(s.targetLocation) : "";
       // const caregiverSkills = s?.caregiverID.skills ? String(s.caregiverID.skills) : "";
       return `Senior care information: {
-        booking note: ${clientNote}, 
+        booking note: ${customerNote}, 
         senior medical profile: ${medicalProfile}, 
         dob: ${dob}, 
         gender: ${gender}, 
@@ -163,7 +163,7 @@ export const aiCareSuggestion = async (req, res, next) => {
       "",
       "INSTRUCTIONS:",
       "- You are a caregiver of a senior care platform with certified senior care.",
-      "- Ananylzed indight in the retrieved context and gernerate suggestions for a caregiver to improve the senior care",
+      "- Ananylzed insight in the retrieved context and gernerate suggestions for a caregiver to improve the senior care",
       "- Generate a brief suggestions in Thai language and easy to understand",
     ].join("\n");
 
