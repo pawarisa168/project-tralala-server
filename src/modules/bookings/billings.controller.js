@@ -1,4 +1,4 @@
-import { Billing } from "../../models/booking.model.js";
+import { Billing } from "../../models/billing.model.js";
 
 // route handler: get all billings from the database
 export const getBillings = async (req, res, next) => {

@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 // BILLING
 // shoppingCartItemSchema for using in billingSchema
 const shoppingCartItemSchema = new mongoose.Schema(
