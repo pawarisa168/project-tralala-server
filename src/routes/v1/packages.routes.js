@@ -1,12 +1,12 @@
 import { Router } from "express";
 import { getPackages, getPackagesId } from "../../controller/packages.controller.js";
 
-const PackageRouter = Router();
+const packageRouter = Router();
 
 // ดูบริการทั้งหมด
-PackageRouter.get("/Packageslist", getPackages);
+packageRouter.get("/packageslist", getPackages);
 
 // ดูข้อมูลบริการตามไอดี
-PackageRouter.get("/Packageslist/:id", getPackagesId);
+packageRouter.get("/packageslist/:id", getPackagesId);
 
-export default PackageRouter;
+export default packageRouter;
