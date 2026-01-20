@@ -20,7 +20,7 @@ Content-Type: application/json
 }
 
 ### PATCH request to update a booking
-PATCH http://localhost:3000/api/v1/bookings/696f48a9ef9b9c30db4128b9
+PATCH http://localhost:3000/api/v1/bookings/696f4f50cec73190952210de
 Content-Type: application/json
 
 {
@@ -32,10 +32,10 @@ Content-Type: application/json
 }
 
 ### PATCH request to generate an ai suggestion into a specific booking document
-PATCH http://localhost:3000/api/v1/bookings/696f48a9ef9b9c30db4128b9/ai/suggestion
+PATCH http://localhost:3000/api/v1/bookings/696f4f50cec73190952210de/ai/suggestion
 
 
-### GET request to update a caregiver
+### GET request to update a caregiver embedded vector field
 GET http://localhost:3000/api/v1/caregivers/ai/suggestion/65a04001f1a2b3c4d5e6f601
 
 ### PATCH request to update a booking
@@ -43,6 +43,6 @@ POST http://localhost:3000/api/v1/caregivers/ai/suggestion
 Content-Type: application/json
 
 {
-    "question": "อยากได้คนที่มีประสบการณ์ดูแลผู้สูงอายุ",
+    "question": "อยากได้คนที่มีประสบการณ์ดูแลผู้สูงอายุและนวดเป็น",
     "topK": 5
 }

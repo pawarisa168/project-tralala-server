@@ -38,7 +38,7 @@ const billingSchema = new mongoose.Schema(
     totalAmount: { type: Number, required: true },
     discount: { type: Number },
     netAmount: { type: Number, required: true },
-    payentMethod: { type: String, enum: ["CARD", "TRANSFER"] },
+    payentMethod: { type: String, enum: ["ONLINE_BANKING", "MASTERCARD", "VISA"] },
     status: { type: String, enum: ["PENDING", "PAID", "FAIL"], required: true },
     paidAt: { type: Date },
     customerID: {

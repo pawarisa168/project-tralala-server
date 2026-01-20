@@ -1,8 +1,8 @@
-import { Caregiver } from "../models/caregiver.model.js";
+import { Caregiver } from "../../models/caregiver.model.js";
 import {
   embedText,
   GEMINI_EMBEDDING_DIMS,
-} from "../services/gemini.client.js";
+} from "../../services/gemini.client.js";
 
 const buildUserEmbeddingText = (userDoc) => {
   const firstName = userDoc?.firstName ? String(userDoc.firstName).trim() : "";
