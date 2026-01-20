@@ -1,17 +1,18 @@
-### POST
-POST http://localhost:3000/api/v1/clients/client
+### POST //เส้นนี้ผ่่านแล้ว
+POST http://localhost:3000/api/v1/clients/client1
 Content-Type: application/json
 
-        {
-            "guardian": {
-                "firstName": "เอวา",
-                "lastName": "ทรงเสรี",
-                "relationship": "บุตรสาว",
-                "phone": "0854252541",
-                "email": "eva.songseree@example.com"
-            },
-            "clientID": "65a02001f1a2b3c4d5e6f475"
-        }
+                    {
+                    "guardian": {
+                        "firstName": "เอวา",
+                        "lastName": "ทรงเสรี",
+                        "relationship": "บุตรสาว",
+                        "phone": "0854252541",
+                        "email": "eva.songseree@example.com"
+                    },
+                    "seniors": [],
+                    "userID": "65a02001f1a2b3c4d5e6f475"
+                    }
 
 ### GET
 GET http://localhost:3000/api/v1/clients/client/me

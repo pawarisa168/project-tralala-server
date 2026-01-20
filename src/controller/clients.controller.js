@@ -1,9 +1,9 @@
 import client from "../models/clients.model.js";
 
 export const createClient = async (req, res) => {
-  const { firstName, lastName, relationship, phone, email } = req.body;
+  const { guardian, seniors, userID } = req.body;
 
-  if (!firstName || !lastName || !relationship || !phone || !email) {
+  if (!guardian || !userID) {
     return res.status(400).json({
       success: false,
       message: "Missing required fields",
@@ -12,12 +12,14 @@ export const createClient = async (req, res) => {
   try {
     const newClient = await client.create({
       guardian: {
-        firstName,
-        lastName,
-        relationship,
-        phone,
-        email,
+        firstName: guardian.firstName,
+        lastName: guardian.lastName,
+        relationship: guardian.relationship,
+        phone: guardian.phone,
+        email: guardian.email,
       },
+      seniors: seniors || [],
+      userID: userID,
     });
     const safe = newClient.toObject();
     return res.status(201).json({
