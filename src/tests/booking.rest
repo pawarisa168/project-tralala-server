@@ -35,3 +35,14 @@ Content-Type: application/json
 PATCH http://localhost:3000/api/v1/bookings/696f48a9ef9b9c30db4128b9/ai/suggestion
 
 
+### GET request to update a caregiver
+GET http://localhost:3000/api/v1/caregivers/ai/suggestion/65a04001f1a2b3c4d5e6f601
+
+### PATCH request to update a booking
+POST http://localhost:3000/api/v1/caregivers/ai/suggestion
+Content-Type: application/json
+
+{
+    "question": "อยากได้คนที่มีประสบการณ์ดูแลผู้สูงอายุ",
+    "topK": 5
+}
