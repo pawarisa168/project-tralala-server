@@ -1,25 +1,45 @@
-import { customer} from "../../models/customers.model.js"
+import { Customer } from "../../models/customers.model.js";
 
 export const createCustomer = async (req, res) => {
-  const { guardian, seniors, userID } = req.body;
+  const {
+    guardian,
+    seniors,
+    userID,
+    firstName,
+    lastName,
+    gender,
+    dob,
+    phone,
+    address,
+  } = req.body;
 
-  if (!guardian || !userID) {
+  if (
+    !guardian ||
+    !seniors ||
+    !userID ||
+    !firstName ||
+    !lastName ||
+    !gender ||
+    !dob ||
+    !phone ||
+    !address
+  ) {
     return res.status(400).json({
       success: false,
       message: "Missing required fields",
     });
   }
   try {
-    const newCustomer = await customer.create({
-      guardian: {
-        firstName: guardian.firstName,
-        lastName: guardian.lastName,
-        relationship: guardian.relationship,
-        phone: guardian.phone,
-        email: guardian.email,
-      },
-      seniors: seniors || [],
-      userID: userID,
+    const newCustomer = await Customer.create({
+      guardian,
+      seniors: [],
+      userID,
+      firstName,
+      lastName,
+      gender,
+      dob,
+      phone,
+      address,
     });
     const safe = newCustomer.toObject();
     return res.status(201).json({
@@ -28,7 +48,7 @@ export const createCustomer = async (req, res) => {
       data: safe,
     });
   } catch (error) {
-    console.error("Error code:", error.code);
+    console.error("Mongoose code:", error.message);
     if (error.code === 11000) {
       return res.status(409).json({
         success: false,

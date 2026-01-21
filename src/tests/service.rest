@@ -1,7 +1,7 @@
 ### GET
-GET http://localhost:3000/api/v1/packages/packageslist
+GET http://localhost:3000/api/v1/services/serviceslist
 Content-Type: application/json
 
 ### GET
-GET http://localhost:3000/api/v1/packages/packageslist/659e1001f1a2b3c4d5e6f001
+GET http://localhost:3000/api/v1/services/serviceslist/659e1001f1a2b3c4d5e6f001
 Content-Type: application/json

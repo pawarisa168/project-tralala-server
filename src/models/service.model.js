@@ -8,4 +8,5 @@ const servicesSchema = new mongoose.Schema({
   price: { type: String, trim: true, required: true },
 });
 
-export const service = mongoose.model("service", servicesSchema);
+const service = mongoose.model("service", servicesSchema);
+export default service;

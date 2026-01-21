@@ -1,5 +1,5 @@
 ### POST //เส้นนี้ผ่่านแล้ว
-POST http://localhost:3000/api/v1/clients/client1
+POST http://localhost:3000/api/v1/customers
 Content-Type: application/json
 
                     {
@@ -10,8 +10,16 @@ Content-Type: application/json
                         "phone": "0854252541",
                         "email": "eva.songseree@example.com"
                     },
-                    "seniors": [],
-                    "userID": "65a02001f1a2b3c4d5e6f475"
+                    "seniors": [
+                    "65a02001f1a2b3c4d5e6f401"
+                    ],
+                    "userID": "65a00001f1a2b3c4d5e6f202",
+                    "firstName": "นิรันดร์",
+                    "lastName": "สุขสันต์",
+                    "gender": "Male",
+                    "dob": "1990-05-15",
+                    "phone": "0854252541",
+                    "address": "123 ถนนสุขุมวิท แขวงคลองตัน เขตคลองเตย กรุงเทพฯ 10110"
                     }
 
 ### GET
@@ -19,5 +27,5 @@ GET http://localhost:3000/api/v1/clients/client/me
 Content-Type:  application/json
 
 ### GET //เส้นนี้ผ่่านแล้ว
-GET http://localhost:3000/api/v1/clients/clients/65a02001f1a2b3c4d5e6f401
+GET http://localhost:3000/api/v1/customers/65a02001f1a2b3c4d5e6f401
 Content-Type: application/json

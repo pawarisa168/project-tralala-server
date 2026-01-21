@@ -1,4 +1,4 @@
-import { service} from "../../models/service.model.js";
+import  service from "../../models/service.model.js";
 
 export const getServices = async (req, res) => {
   try {
@@ -22,9 +22,9 @@ export const getServicesId = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const serviceId = await packages.findById(id);
+    const serviceId = await service.findById(id);
     if (!serviceId) {
-      const err = new Error("Package not found");
+      const err = new Error("Service not found");
       err.code = "NOT_FOUND";
       throw err;
     }
