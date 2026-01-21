@@ -1,4 +1,5 @@
 import { Router } from "express";
+import {getCaregiverLogs} from "../../modules/caregiver-log/caregiver-log.controller.js";
 
 export const router = Router();
 
@@ -12,45 +13,6 @@ router.get("/id", getActiveCaregivers);
 // PATCH
 router.patch("/id", addActiveLog);
 
+// get data caregiver log http://localhost:3000/api/v1/caregiver-logs
+router.get("/", getCaregiverLogs);
 
-export const editCaregiverById = async (req, res) => {
-  try {
-    console.log(200).json({
-      success: true,
-      message: "edit caregiver by id",
-    });
-  } catch (error) {
-    console.error(500).json({
-      success: false,
-      message: "server error",
-    });
-  }
-};
-
-export const getActiveCaregivers = async (req, res) => {
-  try {
-    console.log(200).json({
-      success: true,
-      message: "get active caregivers",
-    });
-  } catch (error) {
-    console.error(500).json({
-      success: false,
-      message: "server error",
-    });
-  }
-};
-
-export const addActiveLog = async (req, res) => {
-  try {
-    console.log(200).json({
-      success: true,
-      message: "add active log",
-    });
-  } catch (error) {
-    console.error(500).json({
-      success: false,
-      message: "server error",
-    });
-  }
-};

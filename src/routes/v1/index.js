@@ -12,5 +12,5 @@ router.use("/auth", authRouter);
 router.use("/caregivers", caregiversRouter);
 router.use("/customers", customersRouter);
 router.use("/bookings", bookingRouter);
-router.use("/services", servicesRouter);
-router.use("/caregiver-log", logRouter);
+router.use("/services", serviceRouter);
+router.use("/caregiver-logs", logRouter);

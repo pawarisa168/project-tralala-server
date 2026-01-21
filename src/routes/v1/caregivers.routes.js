@@ -4,9 +4,6 @@ import {
   getAllCaregivers,
   getCaregiverById,
   updateCaregiver,
-  editCaregiverById,
-  getActiveCaregivers,
-  addActiveLog,
   getMyProfile,
   getMyOverview,
   getMySchedule,
@@ -46,3 +43,4 @@ router.get("/:id/reviews", getReviewsByCaregiverId);
 
 // update picture http://localhost:3000/api/v1/caregivers/:id/picture
 router.post("/:id/picture", updateCaregiverPicture);
+
