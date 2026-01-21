@@ -1,6 +1,6 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose from "mongoose";
 
-const { Schema, model } = mongoose();
+const { Schema, model } = mongoose;
 
 const CareVisitSchema = new Schema(
   {
