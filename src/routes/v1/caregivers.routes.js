@@ -45,3 +45,4 @@ router.get("/:id/reviews", getReviewsByCaregiverId);
 
 // update picture http://localhost:3000/api/v1/caregivers/:id/picture
 router.post("/:id/picture", updateCaregiverPicture);
+
