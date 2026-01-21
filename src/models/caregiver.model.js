@@ -94,9 +94,10 @@ const CaregiverSchema = new Schema(
         default: "PENDING",
       },
     },
-    {
-      timestamps: true,
-    },
+  },
+  {
+    timestamps: true
+  }
 );
 
 export const Caregiver = model("Caregiver", CaregiverSchema);
