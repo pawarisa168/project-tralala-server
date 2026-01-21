@@ -1,6 +1,5 @@
 import { Caregiver } from "../../models/caregiver.model.js";
 import { Review } from "../../models/review.model.js";
-import { mongoose } from "mongoose";
 
 // create caregiverprofile สร้างโปรไฟล์ caregiver
 export const createCaregiverProfile = async (req, res) => {
