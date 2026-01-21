@@ -1,6 +1,11 @@
 import { Caregiver } from "../../models/caregiver.model.js";
+<<<<<<< HEAD
 import { embedText, generateText } from "../../services/gemini.client.js";
 import { queueEmbedUserById } from "./caregivers.embedding.js";
+=======
+import { CareVisit } from "../../models/careVisit.model.js";
+
+>>>>>>> dev
 
 // create caregiverprofile สร้างโปรไฟล์ caregiver
 export const createCaregiverProfile = async (req, res) => {
@@ -249,5 +254,16 @@ export const aiCaregiversEmbedded = async (req, res, next) => {
     error.name = error.name || "DatabaseError";
     error.message = error.message || "Failed to get a user";
     return next(error);
+  }
+};
+// get data caregiver logs
+export const getCaregiverLogs = async (req, res) => {
+  try {
+    const CaregiverLogs = await CareVisit.find();
+    res.status(200).json({data: CaregiverLogs});
+    console.log(CaregiverLogs);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({message: "cannot get data log"});
   }
 };

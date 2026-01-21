@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose from "mongoose";
 
 const { Schema, model } = mongoose;
 
@@ -58,7 +58,7 @@ const CareVisitSchema = new Schema(
       index: true,
     },
   },
-  { timestamps: true },
+  { timestamps: true},
 );
 
 export const CareVisit = model("CareVisit", CareVisitSchema);
