@@ -1,18 +1,23 @@
 import { Router } from "express";
-import {editCaregiverById, getActiveCaregivers, addActiveLog, getCaregiverLogs} from "../../modules/caregiver-log/caregiver-log.controller.js";
+import {
+  editCaregiverById,
+  getActiveCaregivers,
+  addActiveLog,
+  getCaregiverLogs,
+} from "../../modules/caregiver-log/caregiver-log.controller.js";
 
 const routerLog = Router();
 
+// get data caregiver log http://localhost:3000/api/v1/caregiver-logs
+routerLog.get("/", getCaregiverLogs); //เส้นนี้ผ่านแล้ว
 
 // PUT
-routerLog.put("/id", editCaregiverById);
+routerLog.put("/edit/:id", editCaregiverById);
+
 // GET
-routerLog.get("/id", getActiveCaregivers);
+routerLog.get("/active", getActiveCaregivers);
 
 // PATCH
-routerLog.patch("/id", addActiveLog);
-
-// get data caregiver log http://localhost:3000/api/v1/caregiver-logs
-routerLog.get("/", getCaregiverLogs);
+routerLog.patch("/addactive/:id", addActiveLog);
 
 export default routerLog;
