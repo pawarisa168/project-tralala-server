@@ -1,4 +1,4 @@
-import { CareVisit } from "../../models/careVisit.model.js";
+import routerLog from "../../routes/v1/log.routes.js"
 
 // get data caregiver logs
 export const getCaregiverLogs = async (req, res) => {
