@@ -1,4 +1,7 @@
 import mongoose from "mongoose";
+import { Service } from "./services.models.js";
+import { Customer } from "./customers.model.js";
+import { Booking } from "./booking.model.js";
 
 // BILLING
 // shoppingCartItemSchema for using in billingSchema
@@ -9,9 +12,9 @@ const shoppingCartItemSchema = new mongoose.Schema(
       ref: "Booking",
       required: true,
     },
-    packageID: {
+    serviceID: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Package",
+      ref: "Service",
       required: true,
     },
   },
@@ -35,12 +38,12 @@ const billingSchema = new mongoose.Schema(
     totalAmount: { type: Number, required: true },
     discount: { type: Number },
     netAmount: { type: Number, required: true },
-    payentMethod: { type: String, enum: ["CARD", "TRANSFER"] },
+    payentMethod: { type: String, enum: ["ONLINE_BANKING", "MASTERCARD", "VISA"] },
     status: { type: String, enum: ["PENDING", "PAID", "FAIL"], required: true },
     paidAt: { type: Date },
-    clientID: {
+    customerID: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Client",
+      ref: "Customer",
       required: true,
     },
   },
