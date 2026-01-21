@@ -33,9 +33,9 @@ const ReviewSchema = new Schema(
       required: true,
       index: true,
     },
-    clientID: {
+    costomerID: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "clients",
+      ref: "customers",
       required: true,
       index: true,
     },
