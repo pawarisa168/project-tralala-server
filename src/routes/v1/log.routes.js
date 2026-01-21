@@ -15,7 +15,7 @@ routerLog.get("/", getCaregiverLogs); //เส้นนี้ผ่านแล�
 routerLog.put("/edit/:id", editCaregiverById);
 
 // GET
-routerLog.get("/active", getActiveCaregivers);
+routerLog.get("/active/:id", getActiveCaregivers);
 
 // PATCH
 routerLog.patch("/addactive/:id", addActiveLog);

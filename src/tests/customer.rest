@@ -1,4 +1,4 @@
-### POST //เส้นนี้ผ่่านแล้ว
+### POST //เส้นนี้ผ่่านแล้ว แต่ยังสร้างซ้ำ
 POST http://localhost:3000/api/v1/customers
 Content-Type: application/json
 

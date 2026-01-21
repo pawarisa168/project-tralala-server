@@ -6,7 +6,7 @@ GET http://localhost:3000/api/v1/caregiver-logs
 PUT http://localhost:3000/api/v1/caregiver-logs/edit/66b01001f1a2b3c4d5e6fa01
 
 ### GET
-GET http://localhost:3000/api/v1/caregiver-logs/active/{caregiverId}
+GET http://localhost:3000/api/v1/caregiver-logs/active/66b01001f1a2b3c4d5e6fa01
 
 ### PATCH
 PATCH http://localhost:3000/api/v1/caregiver-logs/addactive/{caregiverId}

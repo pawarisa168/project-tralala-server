@@ -58,18 +58,51 @@ export const editCaregiverById = async (req, res) => {
 };
 
 export const getActiveCaregivers = async (req, res) => {
+  const { id } = req.params;
+  console.log("Caregiver ID", id);
   try {
-    console.log(200).json({
+    const lastestActivity = await CareVisit.findOne({ id })
+      .sort({ visitDate: -1, statTime: -1 })
+      .select("visitDate startTime status caregiverNote vitalSigns")
+      .exec();
+
+    if (!lastestActivity) {
+      return res.status(404).json({
+        success: false,
+        message: "There is no history of visiting activities yet.",
+
+      });
+    }
+
+    res.status(200).json({
       success: true,
-      message: "get active caregivers",
+      message: "Successfully retrieved latest activity data.",
+      data: lastestActivity,
     });
   } catch (error) {
-    console.error(500).json({
+    res.status(500).json({
       success: false,
       message: "server error",
+      error: error.message,
     });
   }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export const addActiveLog = async (req, res) => {
   try {
