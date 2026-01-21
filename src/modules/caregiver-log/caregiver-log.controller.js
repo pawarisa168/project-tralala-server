@@ -61,8 +61,9 @@ export const getActiveCaregivers = async (req, res) => {
   const { id } = req.params;
   console.log("Caregiver ID", id);
   try {
-    const lastestActivity = await CareVisit.findOne({ id })
-      .sort({ visitDate: -1, statTime: -1 })
+    const lastestActivity = await CareVisit.findOne({
+      _id: id,
+    })
       .select("visitDate startTime status caregiverNote vitalSigns")
       .exec();
 
@@ -70,7 +71,6 @@ export const getActiveCaregivers = async (req, res) => {
       return res.status(404).json({
         success: false,
         message: "There is no history of visiting activities yet.",
-
       });
     }
 
@@ -87,22 +87,6 @@ export const getActiveCaregivers = async (req, res) => {
     });
   }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 export const addActiveLog = async (req, res) => {
   try {
