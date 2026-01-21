@@ -1,14 +1,13 @@
-import packages from "../models/packages.models.js";
+import { service} from "../../models/service.model.js";
 
-export const getPackages = async (req, res) => {
+export const getServices = async (req, res) => {
   try {
-    const Packages = await packages.find();
-
-    console.log("Database Data:", Packages);
+    const services = await service.find();
+    console.log("Database Data:", services);
     res.status(200).json({
       success: true,
       message: "Choose your booking service ",
-      data: Packages,
+      data: services,
     });
   } catch (error) {
     console.error(error);
@@ -19,20 +18,20 @@ export const getPackages = async (req, res) => {
   }
 };
 
-export const getPackagesId = async (req, res) => {
+export const getServicesId = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const packageId = await packages.findById(id)
-    if (!packageId) {
+    const serviceId = await packages.findById(id);
+    if (!serviceId) {
       const err = new Error("Package not found");
       err.code = "NOT_FOUND";
       throw err;
     }
     res.status(200).json({
       success: true,
-      message: "Get package details successfully ",
-      data: packageId,
+      message: "Get service details successfully ",
+      data: serviceId,
     });
   } catch (error) {
     console.error(error);

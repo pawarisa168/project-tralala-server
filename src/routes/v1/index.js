@@ -1,16 +1,16 @@
 import { Router } from "express";
 import { router as authRouter } from "../v1/auth.routes.js";
 import { router as caregiversRouter } from "./caregivers.routes.js";
-import ClientsRouter from "./clients.routes.js";
+import customersRouter from "./customers.routes.js";
 import { router as bookingRouter } from "./bookings.routes.js";
-import  packageRouter  from "./packages.routes.js";
+import  servicesRouter  from "./services.routes.js";
 import { router as logRouter } from "./log.routes.js";
 
 export const router = Router();
 
 router.use("/auth", authRouter);
 router.use("/caregivers", caregiversRouter);
-router.use("/clients", ClientsRouter);
+router.use("/customers", customersRouter);
 router.use("/bookings", bookingRouter);
-router.use("/packages", packageRouter);
+router.use("/services", servicesRouter);
 router.use("/caregiver-log", logRouter);

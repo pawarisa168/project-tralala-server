@@ -1,6 +1,6 @@
-import client from "../models/clients.model.js";
+import { customer} from "../../models/customers.model.js"
 
-export const createClient = async (req, res) => {
+export const createCustomer = async (req, res) => {
   const { guardian, seniors, userID } = req.body;
 
   if (!guardian || !userID) {
@@ -10,7 +10,7 @@ export const createClient = async (req, res) => {
     });
   }
   try {
-    const newClient = await client.create({
+    const newCustomer = await customer.create({
       guardian: {
         firstName: guardian.firstName,
         lastName: guardian.lastName,
@@ -21,10 +21,10 @@ export const createClient = async (req, res) => {
       seniors: seniors || [],
       userID: userID,
     });
-    const safe = newClient.toObject();
+    const safe = newCustomer.toObject();
     return res.status(201).json({
       success: true,
-      message: "Client created successfully",
+      message: "Customer created successfully",
       data: safe,
     });
   } catch (error) {
@@ -42,26 +42,14 @@ export const createClient = async (req, res) => {
   }
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-export const getClientbyme = async (req, res) => {
+export const getCustomerbyme = async (req, res) => {
   try {
-    const client = await client.find();
-    console.log("Database Data:", client);
+    const customer = await Customer.find();
+    console.log("Database Data:", customer);
     res.status(200).json({
       success: true,
       message: "Is'me ",
-      data: client,
+      data: customer,
     });
   } catch (error) {
     res.status(500).json({
@@ -72,38 +60,20 @@ export const getClientbyme = async (req, res) => {
   }
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-export const getClientId = async (req, res) => {
+export const getCustomerId = async (req, res) => {
   const { id } = req.params;
-  console.log("Client ID:", id);
+  console.log("Customer ID:", id);
   try {
-    const clientId = await client.findById(id);
-    if (!clientId) {
-      const err = new Error("Client not found");
+    const customerId = await Customer.findById(id);
+    if (!customerId) {
+      const err = new Error("Customer not found");
       err.code = "NOT_FOUND";
       throw err;
-  }
+    }
     res.status(200).json({
       success: true,
-      message: "Look some client",
-      data: clientId,
+      message: "Look some customer",
+      data: customerId,
     });
   } catch (error) {
     res.status(500).json({

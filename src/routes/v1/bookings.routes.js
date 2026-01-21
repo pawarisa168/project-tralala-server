@@ -3,7 +3,8 @@ import {
     getBookings,
     getBooking,
     createBooking,
-    updateBooking
+    updateBooking,
+    aiCareSuggestion
 } from "../../modules/bookings/bookings.controller.js";
 import {
     getBillings,
@@ -39,4 +40,9 @@ router.post("/:bid/billings", createBilling);
 
 // Add senior field to a booking document
 router.patch("/:bid/billings/:id", updateBilling);
+
+// GEMINI
+// Send prompt with senior information and carenote of a specific booking to GEMENI and generate a care suggestion response for ceregiver
+router.patch("/:bid/ai/suggestion", aiCareSuggestion);
+
 
