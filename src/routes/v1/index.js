@@ -13,4 +13,4 @@ router.use("/caregivers", caregiversRouter);
 router.use("/customers", customersRouter);
 router.use("/bookings", bookingRouter);
 router.use("/services", serviceRouter);
-router.use("/caregiver-log", logRouter);
+router.use("/caregiver-logs", logRouter);

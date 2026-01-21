@@ -1,4 +1,6 @@
 import { Caregiver } from "../../models/caregiver.model.js";
+import { CareVisit } from "../../models/careVisit.model.js";
+
 
 // create caregiverprofile สร้างโปรไฟล์ caregiver
 export const createCaregiverProfile = async (req, res) => {
@@ -97,4 +99,16 @@ export const getReviewsByCaregiverId = async (req, res) => {
 export const updateCaregiverPicture = async (req, res) => {
   try {
   } catch (error) {}
+};
+
+// get data caregiver logs
+export const getCaregiverLogs = async (req, res) => {
+  try {
+    const CaregiverLogs = await CareVisit.find();
+    res.status(200).json({data: CaregiverLogs});
+    console.log(CaregiverLogs);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({message: "cannot get data log"});
+  }
 };

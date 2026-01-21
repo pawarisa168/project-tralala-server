@@ -1,0 +1,3 @@
+
+###  GET request to read caregiver-logs
+GET http://localhost:3000/api/v1/caregiver-logs
