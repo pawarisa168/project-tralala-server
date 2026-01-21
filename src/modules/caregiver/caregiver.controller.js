@@ -1,11 +1,8 @@
 import { Caregiver } from "../../models/caregiver.model.js";
-<<<<<<< HEAD
 import { embedText, generateText } from "../../services/gemini.client.js";
 import { queueEmbedUserById } from "./caregivers.embedding.js";
-=======
 import { CareVisit } from "../../models/careVisit.model.js";
 
->>>>>>> dev
 
 // create caregiverprofile สร้างโปรไฟล์ caregiver
 export const createCaregiverProfile = async (req, res) => {
