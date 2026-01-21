@@ -89,15 +89,6 @@ export const getActiveCaregivers = async (req, res) => {
 };
 
 export const addActiveLog = async (req, res) => {
-  try {
-    console.log(200).json({
-      success: true,
-      message: "add active log",
-    });
-  } catch (error) {
-    console.error(500).json({
-      success: false,
-      message: "server error",
-    });
-  }
+  const { id } = req.params;
+  const { log } = req.body;
 };

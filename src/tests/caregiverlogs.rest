@@ -1,4 +1,4 @@
-### GET 
+### GET  // เส้นนี้ผ่านแล้ว
 GET http://localhost:3000/api/v1/caregiver-logs/active/66b01001f1a2b3c4d5e6fa01
 
 ###  GET request to read caregiver-logs // เส้นนี้ผ่านแล้ว
