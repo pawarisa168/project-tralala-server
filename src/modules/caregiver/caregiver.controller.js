@@ -7,6 +7,8 @@ export const createCaregiverProfile = async (req, res) => {
   try {
     const caregiver = await Caregiver.create(req.body);
 
+    queueEmbedUserById(doc._id);
+
     res.status(201).json({
       message: "Caregiver profile created successfully",
       data: caregiver,
@@ -33,6 +35,9 @@ export const updateCaregiver = async (req, res) => {
       { new: true },
     ).exec();
     console.log(id);
+
+    queueEmbedUserById(doc._id);
+
     res.json(updateCaregiverprofile);
   } catch (error) {
     console.error(error);

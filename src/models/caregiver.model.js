@@ -80,6 +80,7 @@ const CaregiverSchema = new Schema({
   phone: { type: String, trim: true, required: true },
   email: { type: String, trim: true, required: true },
   address: { type: String, trim: true, required: true },
+  imageUrl: { type: String, trim: true },
   embedding: {
     status: {
       type: String,
