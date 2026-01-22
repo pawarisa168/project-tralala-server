@@ -2,7 +2,7 @@
 GET http://localhost:3000/api/v1/bookings
 
 ### GET request to read a booking
-GET http://localhost:3000/api/v1/bookings/69691632b745863fe4b4e8d8
+GET http://localhost:3000/api/v1/bookings/65a00001f1a2b3c4d5e6f201
 
 ### POST request to create a booking
 POST http://localhost:3000/api/v1/bookings

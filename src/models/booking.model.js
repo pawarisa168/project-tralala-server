@@ -100,7 +100,18 @@ const bookingSchema = new mongoose.Schema(
       ref: "Billing",
     },
     seniorCareSummary: { type: String, trim: true },
+    caregiverReport: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+    caregiverWorkSummary: {
+      type: String,
+      trim: true,
+      default: "",
+    },
   },
+
   {
     timestamps: true,
   },

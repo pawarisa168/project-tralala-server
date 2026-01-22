@@ -84,16 +84,13 @@ export const getMyProfile = async (req, res) => {
   }
 };
 
-//caregiver ดูข้อมูล dashboard ของตัวเอง
-export const getMyOverview = async (req, res) => {
-  try {
-  } catch (error) {}
-};
-
 //caregiver ดูข้อมูลตารางงานที่ได้รับ
 export const getMySchedule = async (req, res) => {
   try {
-  } catch (error) {}
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "cannot get data" });
+  }
 };
 
 //read by _id

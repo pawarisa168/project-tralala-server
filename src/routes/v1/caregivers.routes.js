@@ -4,16 +4,16 @@ import {
   getAllCaregivers,
   getCaregiverById,
   updateCaregiver,
-  getMyProfile,
-  getMyOverview,
   getMySchedule,
   createReview,
   getReviewsByCaregiverId,
   updateCaregiverPicture,
+  getMyProfile,
   aiCaregiversSuggestion,
   aiCaregiversEmbedded
 } from "../../modules/caregiver/caregiver.controller.js";
 import { auth } from "../../middlewares/auth.js";
+import { getMyOverview } from "../../modules/caregiver/dashbord.controller.js";
 
 export const router = Router();
 
@@ -31,7 +31,7 @@ router.get("/", getAllCaregivers);
 router.get("/me", auth, getMyProfile);
 
 // dashboard overview http://localhost:3000/api/v1/caregivers/me/overview
-router.get("/me/overview", getMyOverview);
+router.get("/me/overview", auth, getMyOverview);
 
 // dashboard schedule http://localhost:3000/api/v1/caregivers/me/schedule
 router.get("/me/schedule", getMySchedule);
