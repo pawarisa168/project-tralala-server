@@ -127,3 +127,35 @@ export const addActiveLog = async (req, res) => {
     });
   }
 };
+
+// POST: create a caregiver log
+export const createCaregiverLog = async (req, res) => {
+  try {
+    const newLog = await CareVisit.create(req.body);
+
+    res.status(201).json({
+      message: "Caregiver log created successfully",
+      data: newLog,
+    });
+  } catch (error) {
+    console.error("CREATE CAREGIVER LOG ERROR:", error);
+    res.status(400).json({ message: error.message });
+  }
+};
+
+// GET: get caregiver log by ID
+export const getCaregiverLogById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const log = await CareVisit.findById(id);
+
+    if (!log) {
+      return res.status(404).json({ message: "Caregiver log not found" });
+    }
+
+    res.status(200).json({ data: log });
+  } catch (error) {
+    console.error("GET CAREGIVER LOG ERROR:", error);
+    res.status(500).json({ message: "Cannot get caregiver log" });
+  }
+};
