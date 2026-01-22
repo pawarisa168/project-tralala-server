@@ -58,7 +58,7 @@ const CareVisitSchema = new Schema(
       index: true,
     },
   },
-  { timestamps: true },
+  { timestamps: true},
 );
 
 export const CareVisit = model("CareVisit", CareVisitSchema);

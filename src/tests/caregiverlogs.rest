@@ -1,0 +1,11 @@
+### GET  // เส้นนี้ผ่านแล้ว
+GET http://localhost:3000/api/v1/caregiver-logs/active/66b01001f1a2b3c4d5e6fa01
+
+###  GET request to read caregiver-logs // เส้นนี้ผ่านแล้ว
+GET http://localhost:3000/api/v1/caregiver-logs
+
+### PUT request to edit caregiver-logs by id // เส้นนี้ผ่านแล้ว
+PUT http://localhost:3000/api/v1/caregiver-logs/edit/66b01001f1a2b3c4d5e6fa01
+
+### PATCH
+PATCH http://localhost:3000/api/v1/caregiver-logs/addactive/66b01001f1a2b3c4d5e6fa01
