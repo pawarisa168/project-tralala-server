@@ -6,12 +6,33 @@ const GENERATION_MODEL = "gemini-2.5-flash";
 const EXPECTED_EMBEDDING_DIMS = 3072;
 
 export const embedText = async ({
-  apiKey = process.env.GEMINI_API_KEY,
+  apiKey1 = process.env.GEMINI_API_KEY1,
+  apiKey2 = process.env.GEMINI_API_KEY2,
+  apiKey3 = process.env.GEMINI_API_KEY3,
+  apiKey4 = process.env.GEMINI_API_KEY4,
+  apiKey5 = process.env.GEMINI_API_KEY5,
+  apiKey6 = process.env.GEMINI_API_KEY6,
+  apiKey7 = process.env.GEMINI_API_KEY7,
+  apiKey8 = process.env.GEMINI_API_KEY8,
+  apiKey9 = process.env.GEMINI_API_KEY9,
+  apiKey10 = process.env.GEMINI_API_KEY10,
   text,
   baseUrl = process.env.GEMINI_API_BASE_URL || DEFAULT_BASE_URL,
   model = process.env.GEMINI_EMBEDDING_MODEL || EMBEDDING_MODEL,
-  timeoutMs = Number(process.env.GEMINI_HTTP_TIMEOUT_MS || 15000), // 15 seconds
+  timeoutMs = Number(process.env.GEMINI_HTTP_TIMEOUT_MS || 25000), // 15 seconds
 } = {}) => {
+const apiKeys = [
+  apiKey1,
+  apiKey2,
+  apiKey3,
+  apiKey4,
+  apiKey5,
+  apiKey6,
+  apiKey7,
+  apiKey8,
+  apiKey9,
+  apiKey10,
+].filter(Boolean); // remove undefined keys
   const trimmed = String(text || "").trim();
 
   if (!trimmed) {
@@ -21,31 +42,65 @@ export const embedText = async ({
     throw error;
   }
 
-  if (!apiKey) {
-    const error = new Error("GEMINI_API_KEY must be set to compute embeddings");
+  if (!Array.isArray(apiKeys) || apiKeys.length === 0) {
+    const error = new Error("At least one GEMINI_API_KEY must be set to compute embeddings");
     error.name = "ConfigurationError";
     error.status = 500;
     throw error;
   }
 
-  const url = `${baseUrl}/v1beta/models/${encodeURIComponent(
-    model
-  )}:embedContent?key=${encodeURIComponent(apiKey)}`;
+  const buildUrl = (key) =>
+    `${baseUrl}/v1beta/models/${encodeURIComponent(model)}:embedContent?key=${encodeURIComponent(key)}`;
 
-  const { data } = await axios.post(
-    url,
-    {
-      content: {
-        parts: [{ text: trimmed }],
+  const requestEmbedding = async (key) => {
+    const { data } = await axios.post(
+      buildUrl(key),
+      {
+        content: {
+          parts: [{ text: trimmed }],
+        },
       },
-    },
-    {
-      timeout: timeoutMs,
-      headers: {
-        "Content-Type": "application/json",
-      },
+      {
+        timeout: timeoutMs,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    return data;
+  };
+
+  let data;
+  let lastError;
+
+  for (let i = 0; i < apiKeys.length; i++) {
+    try {
+      // 🔁 retry same key once on network error
+      try {
+        data = await requestEmbedding(apiKeys[i]);
+      } catch (err) {
+        if (isRetryableNetworkError(err)) {
+          console.warn(`Network error on key #${i + 1}, retrying once...`);
+          data = await requestEmbedding(apiKeys[i]);
+        } else {
+          throw err;
+        }
+      }
+      break; // ✅ success
+    } catch (err) {
+      lastError = err;
+      console.warn(`Gemini API key #${i + 1} failed`);
     }
-  );
+  }
+
+  if (!data) {
+    const error = new Error("All Gemini API keys failed");
+    error.name = "UpstreamError";
+    error.status = 502;
+    error.details = {
+      attempts: apiKeys.length,
+      lastStatus: lastError?.response?.status,
+    };
+    throw error;
+  }
 
   const vector =
     data?.embedding?.values ||
@@ -76,13 +131,34 @@ export const embedText = async ({
 export const GEMINI_EMBEDDING_DIMS = EXPECTED_EMBEDDING_DIMS;
 
 export const generateText = async ({
-  apiKey = process.env.GEMINI_API_KEY,
+  apiKey1 = process.env.GEMINI_API_KEY1,
+  apiKey2 = process.env.GEMINI_API_KEY2,
+  apiKey3 = process.env.GEMINI_API_KEY3,
+  apiKey4 = process.env.GEMINI_API_KEY4,
+  apiKey5 = process.env.GEMINI_API_KEY5,
+  apiKey6 = process.env.GEMINI_API_KEY6,
+  apiKey7 = process.env.GEMINI_API_KEY7,
+  apiKey8 = process.env.GEMINI_API_KEY8,
+  apiKey9 = process.env.GEMINI_API_KEY9,
+  apiKey10 = process.env.GEMINI_API_KEY10,
   prompt,
   baseUrl = process.env.GEMINI_API_BASE_URL || DEFAULT_BASE_URL,
   model = process.env.GEMINI_GENERATION_MODEL || GENERATION_MODEL,
   timeoutMs = Number(process.env.GEMINI_HTTP_TIMEOUT_MS || 20000), // 20 seconds
   temperature = Number(process.env.GEMINI_TEMPERATURE || 0.2),
 } = {}) => {
+  const apiKeys = [
+    apiKey1,
+    apiKey2,
+    apiKey3,
+    apiKey4,
+    apiKey5,
+    apiKey6,
+    apiKey7,
+    apiKey8,
+    apiKey9,
+    apiKey10,
+  ].filter(Boolean); // remove undefined keys
   const trimmed = String(prompt || "").trim();
 
   if (!trimmed) {
@@ -92,37 +168,52 @@ export const generateText = async ({
     throw error;
   }
 
-  if (!apiKey) {
-    const error = new Error("GEMINI_API_KEY must be set to generate response");
+  if (!Array.isArray(apiKeys) || apiKeys.length === 0) {
+    const error = new Error("At least one GEMINI_API_KEY must be set to generate response");
     error.name = "ConfigurationError";
     error.status = 500;
     throw error;
   }
 
-  const url = `${baseUrl}/v1beta/models/${encodeURIComponent(
-    model
-  )}:generateContent?key=${encodeURIComponent(apiKey)}`;
+  const buildUrl = (key) =>
+    `${baseUrl}/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(key)}`;
 
-  const { data } = await axios.post(
-    url,
-    {
-      contents: [
-        {
-          role: "user",
-          parts: [{ text: trimmed }],
+  const requestGenerating = async (key) => {
+    const { data } = await axios.post(
+      buildUrl(key),
+      {
+        contents: [
+          {
+            role: "user",
+            parts: [{ text: trimmed }],
+          },
+        ],
+        generationConfig: {
+          temperature,
         },
-      ],
-      generationConfig: {
-        temperature,
       },
-    },
-    {
-      timeout: timeoutMs,
-      headers: {
-        "Content-Type": "application/json",
-      },
+      {
+        timeout: timeoutMs,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return data;
+  };
+
+  let data;
+  let lastError;
+
+  for (let i = 0; i < apiKeys.length; i++) {
+    try {
+      data = await requestGenerating(apiKeys[i]);
+      break; // ✅ success
+    } catch (err) {
+      lastError = err;
+      console.warn(`Gemini API key #${i + 1} failed`);
     }
-  );
+  }
 
   const parts = data?.candidates?.[0]?.content?.parts;
   const text = Array.isArray(parts)

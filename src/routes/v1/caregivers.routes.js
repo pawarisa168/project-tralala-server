@@ -9,6 +9,8 @@ import {
   getReviewsByCaregiverId,
   updateCaregiverPicture,
   getMyProfile,
+  aiCaregiversSuggestion,
+  aiCaregiversEmbedded
 } from "../../modules/caregiver/caregiver.controller.js";
 import { auth } from "../../middlewares/auth.js";
 import { getMyOverview } from "../../modules/caregiver/dashbord.controller.js";
@@ -45,3 +47,11 @@ router.get("/:id/reviews", getReviewsByCaregiverId);
 
 // update picture http://localhost:3000/api/v1/caregivers/:id/picture
 router.post("/:id/picture", updateCaregiverPicture);
+
+
+// GEMINI
+// Send prompt with senior information and carenote of a specific booking to GEMENI and generate a care suggestion response for ceregiver
+router.post("/ai/suggestion", aiCaregiversSuggestion);
+
+// Create embedded vector for each specific caregivers
+router.get("/ai/embbedvector/:id", aiCaregiversEmbedded);
