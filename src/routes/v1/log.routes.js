@@ -4,6 +4,8 @@ import {
   getActiveCaregivers,
   addActiveLog,
   getCaregiverLogs,
+  createCaregiverLog,
+  getCaregiverLogById
 } from "../../modules/caregiver-log/caregiver-log.controller.js";
 
 const routerLog = Router();
@@ -19,5 +21,12 @@ routerLog.get("/active/:id", getActiveCaregivers);
 
 // PATCH
 routerLog.patch("/addactive/:id", addActiveLog);
+
+// POST /api/caregiver-logs
+routerLog.post("/", createCaregiverLog);
+
+// GET /api/caregiver-logs/:id
+routerLog.get("/:id", getCaregiverLogById);
+
 
 export default routerLog;
