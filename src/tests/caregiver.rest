@@ -1,2 +1,16 @@
 ### GET request to read all caregivers
 GET http://localhost:3000/api/v1/caregivers
+
+
+
+### GET request to update a caregiver embedded vector field
+GET http://localhost:3000/api/v1/caregivers/ai/embbedvector/65a04001f1a2b3c4d5e6f601
+
+### PATCH request to generate ai suggestion
+POST http://localhost:3000/api/v1/caregivers/ai/suggestion
+Content-Type: application/json
+
+{
+    "question": "อยากได้คนที่มีประสบการณ์ดูแลผู้สูงอายุและนวดเป็น",
+    "topK": 5
+}
