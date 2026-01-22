@@ -49,32 +49,6 @@ const apiKeys = [
     throw error;
   }
 
-  // if (!apiKey) {
-  //   const error = new Error("GEMINI_API_KEY must be set to compute embeddings");
-  //   error.name = "ConfigurationError";
-  //   error.status = 500;
-  //   throw error;
-  // }
-
-  // const url = `${baseUrl}/v1beta/models/${encodeURIComponent(
-  //   model
-  // )}:embedContent?key=${encodeURIComponent(apiKey)}`;
-
-  // const { data } = await axios.post(
-  //   url,
-  //   {
-  //     content: {
-  //       parts: [{ text: trimmed }],
-  //     },
-  //   },
-  //   {
-  //     timeout: timeoutMs,
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   }
-  // );
-
   const buildUrl = (key) =>
     `${baseUrl}/v1beta/models/${encodeURIComponent(model)}:embedContent?key=${encodeURIComponent(key)}`;
 
@@ -99,7 +73,17 @@ const apiKeys = [
 
   for (let i = 0; i < apiKeys.length; i++) {
     try {
-      data = await requestEmbedding(apiKeys[i]);
+      // 🔁 retry same key once on network error
+      try {
+        data = await requestEmbedding(apiKeys[i]);
+      } catch (err) {
+        if (isRetryableNetworkError(err)) {
+          console.warn(`Network error on key #${i + 1}, retrying once...`);
+          data = await requestEmbedding(apiKeys[i]);
+        } else {
+          throw err;
+        }
+      }
       break; // ✅ success
     } catch (err) {
       lastError = err;
@@ -190,31 +174,6 @@ export const generateText = async ({
     error.status = 500;
     throw error;
   }
-
-  // const url = `${baseUrl}/v1beta/models/${encodeURIComponent(
-  //   model
-  // )}:generateContent?key=${encodeURIComponent(apiKey)}`;
-
-  // const { data } = await axios.post(
-  //   url,
-  //   {
-  //     contents: [
-  //       {
-  //         role: "user",
-  //         parts: [{ text: trimmed }],
-  //       },
-  //     ],
-  //     generationConfig: {
-  //       temperature,
-  //     },
-  //   },
-  //   {
-  //     timeout: timeoutMs,
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   }
-  // );
 
   const buildUrl = (key) =>
     `${baseUrl}/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(key)}`;
