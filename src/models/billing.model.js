@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { Service } from "./services.models.js";
+import { Service } from "./service.model.js";
 import { Customer } from "./customers.model.js";
 import { Booking } from "./booking.model.js";
 

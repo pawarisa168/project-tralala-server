@@ -4,6 +4,7 @@ import { Billing } from "../../models/billing.model.js";
 export const getBillings = async (req, res, next) => {
   const { cid } = req.params;
 
+
   try {
     const billings = await Billing.find({ customerID: cid });
     return res.status(200).json({
