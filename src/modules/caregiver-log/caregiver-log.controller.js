@@ -89,6 +89,41 @@ export const getActiveCaregivers = async (req, res) => {
 };
 
 export const addActiveLog = async (req, res) => {
-  const { id } = req.params;
-  const { log } = req.body;
+  try {
+    const { id } = req.params;
+    const updateData = req.body;
+
+    if (!updateData || Object.keys(updateData).length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "NO data provide for update",
+      });
+    }
+
+    const updateLog = await CareVisit.findByIdAndUpdate(
+      id,
+      { $set: updateData },
+      { new: true, runValidators: true },
+    );
+    console.log("ActiveLog", updateData);
+
+    if (!updateLog) {
+      res.status(404).json({
+        success: false,
+        message: "Care visit not found",
+      });
+      return res.status(200).json({
+        success: true,
+        message: "Active log updated successfully",
+        data: updateLog,
+      });
+    }
+  } catch (error) {
+    console.error("Update Error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Error updating log",
+      error: error.message,
+    });
+  }
 };
