@@ -100,7 +100,7 @@ export const getMySchedule = async (req, res) => {
 export const getCaregiverById = async (req, res) => {
   try {
     const id = req.params.id;
-    const readcaregiver = await Caregiver.findOne({ _id: id }).exec();
+    const readcaregiver = await Caregiver.findById(id).exec();
     console.log(req.params.id);
     res.json(readcaregiver);
   } catch (error) {

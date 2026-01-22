@@ -37,7 +37,7 @@ router.get("/me/overview", getMyOverview);
 router.get("/me/schedule", getMySchedule);
 
 // READ http://localhost:3000/api/v1/caregivers/:id
-router.get("/:id", auth, getCaregiverById);
+router.get("/:id", getCaregiverById);
 
 // create review http://localhost:3000/api/v1/caregivers/:id/reviews
 router.post("/:id/reviews", auth, createReview);
@@ -54,4 +54,4 @@ router.post("/:id/picture", updateCaregiverPicture);
 router.post("/ai/suggestion", aiCaregiversSuggestion);
 
 // Create embedded vector for each specific caregivers
-router.get("/ai/suggestion/:id", aiCaregiversEmbedded);
+router.get("/ai/embbedvector/:id", aiCaregiversEmbedded);

@@ -103,3 +103,32 @@ export const getCustomerId = async (req, res) => {
     });
   }
 };
+
+export const getCustomerByUserId = async (req, res) => {
+  const { id } = req.params;
+  console.log("User ID:", id);
+  try {
+    const customerId = await Customer.find({userID: id})
+    .populate({
+            path: "seniors"
+          })
+    ;
+    if (!customerId) {
+      const err = new Error("Customer not found");
+      err.code = "NOT_FOUND";
+      throw err;
+    }
+    res.status(200).json({
+      success: true,
+      message: "Successfully get customer by requested userID",
+      data: customerId,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+      error,
+    });
+  }
+};
+

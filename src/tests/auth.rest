@@ -17,5 +17,6 @@ Content-Type: application/json
     "email": "test88@gmail.com",
     "password": "test888123"
 }
-
-
+somchai@gmail.com
+CUSTOMER_somchai
+cg_chai
