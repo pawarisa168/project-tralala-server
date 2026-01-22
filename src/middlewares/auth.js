@@ -10,7 +10,7 @@ export const auth = async (req, res, next) => {
     const token = authHeader.split(" ")[1];
 
     // verify token
-    // decoded = payload ที่ sign ไว้ตอน login
+    // decoded = payload
     const decode = jwt.verify(token, process.env.JWT_SECRET);
 
     // แนบ identity ให้ request สร้างตัวแปรมาเก็บ
