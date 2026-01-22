@@ -58,9 +58,11 @@ export const login = async (req, res) => {
       };
 
       //generate token
-      const token = jwt.sign(payload, process.env.JWT_SECRET, {
-        expiresIn: "1d",
-      });
+      const token = jwt.sign(
+        { user: { id: user._id } },
+        process.env.JWT_SECRET,
+        { expiresIn: "1d" },
+      );
 
       // response ส่งหน้าบ้าน
       res.status(200).json({

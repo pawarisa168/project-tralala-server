@@ -9,3 +9,26 @@ PUT http://localhost:3000/api/v1/caregiver-logs/edit/66b01001f1a2b3c4d5e6fa01
 
 ### PATCH
 PATCH http://localhost:3000/api/v1/caregiver-logs/addactive/66b01001f1a2b3c4d5e6fa01
+
+### POST create caregiver log
+
+POST http://localhost:3000/api/v1/caregiver-logs
+Content-Type: application/json
+
+{
+  "caregiverId": "66b01001f1a2b3c4d5e6fa01",
+  "bookingId": "66b01001f1a2b3c4d5e6fa99",
+  "visitDate": "2026-01-22T09:00:00Z",
+  "startTime": "2026-01-22T09:00:00Z",
+  "endTime": "2026-01-22T10:00:00Z",
+  "caregiverNotes": {
+    "note": "Checked blood pressure",
+    "vitalSigns": { "bp": "120/80", "pulse": 72 }
+  }
+}
+
+
+
+### GET caregiver log by ID
+GET http://localhost:3000/api/v1/caregiver-logs/66b01001f1a2b3c4d5e6fa01
+

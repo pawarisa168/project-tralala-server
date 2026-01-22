@@ -29,3 +29,6 @@ Content-Type:  application/json
 ### GET //เส้นนี้ผ่่านแล้ว
 GET http://localhost:3000/api/v1/customers/65a02001f1a2b3c4d5e6f401
 Content-Type: application/json
+
+### GET customer by userID
+GET http://localhost:3000/api/v1/customers/user/65a00001f1a2b3c4d5e6f101

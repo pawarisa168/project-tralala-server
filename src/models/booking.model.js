@@ -70,16 +70,17 @@ const bookingSchema = new mongoose.Schema(
     location: { type: String, trim: true },
     startLocation: { type: String, trim: true },
     targetLocation: { type: String, trim: true },
+    shift: { type: String, trim: true },
     status: {
       type: String,
       enum: ["SCHEDULED", "ACTIVE", "PENDING", "COMPLETED", "CANCELLED"],
       required: true,
     },
     schedule: {
-      startDate: { type: Date, required: true },
-      endDate: { type: Date, required: true },
+      startDate: { type: Date},
+      endDate: { type: Date },
+      startTime: { type: String }
     },
-    customerID: { type: String, trim: true },
     customerID: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Customer",
@@ -99,7 +100,18 @@ const bookingSchema = new mongoose.Schema(
       ref: "Billing",
     },
     seniorCareSummary: { type: String, trim: true },
+    caregiverReport: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+    caregiverWorkSummary: {
+      type: String,
+      trim: true,
+      default: "",
+    },
   },
+
   {
     timestamps: true,
   },
