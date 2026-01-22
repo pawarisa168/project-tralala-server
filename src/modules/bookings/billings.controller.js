@@ -6,7 +6,7 @@ export const getBillings = async (req, res, next) => {
 
 
   try {
-    const billings = await Billing.find({ clientID: cid });
+    const billings = await Billing.find({ customerID: cid });
     return res.status(200).json({
       success: true,
       data: billings,
@@ -23,7 +23,7 @@ export const getBilling = async (req, res, next) => {
   const { cid, id } = req.params;
 
   try {
-    const doc = await Billing.findById(id).find({ clientID: cid });
+    const doc = await Billing.findById(id).find({ customerID: cid });
     if (!doc) {
       const error = new Error("Billing not found");
       return next(error);
@@ -43,7 +43,7 @@ export const getBilling = async (req, res, next) => {
 // route handler: create a new Billing in the database
 export const createBilling = async (req, res, next) => {
   const {
-    clientID,
+    customerID,
     shoppingCart,
     numberPackage,
     totalAmount,
@@ -53,7 +53,7 @@ export const createBilling = async (req, res, next) => {
   } = req.body;
 
   if (
-    !clientID ||
+    !customerID ||
     !shoppingCart ||
     !numberPackage ||
     !totalAmount ||
@@ -68,7 +68,7 @@ export const createBilling = async (req, res, next) => {
 
   try {
     const doc = await Billing.create({
-      clientID,
+      customerID,
       shoppingCart,
       numberPackage,
       totalAmount,

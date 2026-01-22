@@ -1,12 +1,15 @@
 import mongoose from "mongoose";
 
-// SERVICES
-// data model of services based on designed data schema of services collection
-const servicesSchema = new mongoose.Schema({
-  name: { type: String, trim: true, required: true },
-  description: { type: String, trim: true, required: true },
-  price: { type: String, trim: true, required: true },
-});
+const servicesSchema = new mongoose.Schema(
+  {
+    name: { type: String, trim: true, required: true },
+    description: { type: String, trim: true, },
+    price: { type: Number, trim: true, },
+    maxTime: { type: String, trim: true, },
+    timeRange: { type: String },
+    isActive: { type: Boolean },
+    durationDay: { type: Number },
+  },
+);
 
-const service = mongoose.model("service", servicesSchema);
-export default service;
+export const Service = mongoose.model("Service", servicesSchema);

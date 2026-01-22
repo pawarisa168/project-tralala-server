@@ -1,4 +1,4 @@
-import CareVisit from "../../models/carevisit.model.js";
+import { CareVisit } from "../../models/careVisit.model.js";
 
 // get data caregiver logs
 export const getCaregiverLogs = async (req, res) => {

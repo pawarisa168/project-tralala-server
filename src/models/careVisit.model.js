@@ -61,6 +61,4 @@ const CareVisitSchema = new Schema(
   { timestamps: true},
 );
 
-const CareVisit = model("CareVisit", CareVisitSchema);
-
-export default CareVisit;
+export const CareVisit = model("CareVisit", CareVisitSchema);
