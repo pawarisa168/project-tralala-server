@@ -4,7 +4,6 @@ import { queueEmbedUserById } from "./caregivers.embedding.js";
 import { Review } from "../../models/review.model.js";
 import { CareVisit } from "../../models/careVisit.model.js";
 
-
 // create caregiverprofile สร้างโปรไฟล์ caregiver
 export const createCaregiverProfile = async (req, res) => {
   try {
@@ -149,8 +148,6 @@ export const updateCaregiverPicture = async (req, res) => {
   } catch (error) {}
 };
 
-
-
 // GEMINI AI handler
 // route handler: ask about caregivers in the database (MongoDB vector/semantic search -> Gemini generate response)
 export const aiCaregiversSuggestion = async (req, res, next) => {
@@ -206,10 +203,14 @@ export const aiCaregiversSuggestion = async (req, res, next) => {
       const firstName = s?.firstName ? String(s.firstName) : "";
       const lastName = s?.lastName ? String(s.lastName) : "";
       const gender = s?.gender ? String(s.gender) : "";
-      const certifications = s?.certifications ? JSON.stringify(s.certifications) : "";
+      const certifications = s?.certifications
+        ? JSON.stringify(s.certifications)
+        : "";
       const skills = s?.skills ? JSON.stringify(s.skills) : "";
       const introduction = s?.introduction ? String(s.introduction) : "";
-      const ratingSummary = s?.ratingSummary ? JSON.stringify(s.ratingSummary) : "";
+      const ratingSummary = s?.ratingSummary
+        ? JSON.stringify(s.ratingSummary)
+        : "";
       const score = typeof s?.score === "number" ? s.score.toFixed(4) : "";
       return `Source ${
         idx + 1
@@ -243,7 +244,7 @@ export const aiCaregiversSuggestion = async (req, res, next) => {
       "{",
       "  caregiverID: [<caregiverDocument.id>],",
       "  answer: <answer>",
-      "}"
+      "}",
     ].join("\n");
 
     let answer = null;
@@ -298,10 +299,10 @@ export const aiCaregiversEmbedded = async (req, res, next) => {
 export const getCaregiverLogs = async (req, res) => {
   try {
     const CaregiverLogs = await CareVisit.find();
-    res.status(200).json({data: CaregiverLogs});
+    res.status(200).json({ data: CaregiverLogs });
     console.log(CaregiverLogs);
   } catch (error) {
     console.error(error);
-    res.status(500).json({message: "cannot get data log"});
+    res.status(500).json({ message: "cannot get data log" });
   }
 };

@@ -7,8 +7,8 @@ import {
 
 const customersRouter = Router();
 
-customersRouter.post("/customer", createCustomer);
-customersRouter.get("/customer/me", getCustomerbyme);
-customersRouter.get("/customers/:id", getCustomerId);
+customersRouter.post("/", createCustomer);
+customersRouter.get("/me", getCustomerbyme);
+customersRouter.get("/:id", getCustomerId);
 
 export default customersRouter;
